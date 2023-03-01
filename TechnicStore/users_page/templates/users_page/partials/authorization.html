@@ -1,0 +1,60 @@
+{% load socialaccount %}
+{% providers_media_js %}
+<div class="login" id="login">
+    <div class="login__menu" id="login__menu">
+        <span class="login__title">Вхід</span>
+        <span class="login__subtitle login__number" id="login__number">Введіть свій номер
+            телефону</span>
+        <span class="login__subtitle login__email" id="login__email">Для входу введіть свою
+            email адресу</span>
+        <form method="post" action="{% url 'login_phone' %}" class="phone_form login__number">
+            {% csrf_token %}
+            {{ phone_login_form.as_p }}
+            <button class="login__next ">
+                Далі
+            </button>
+        </form>
+
+        <form method="post" action="{% url 'login_email' %}" class="email_form login__email">
+            {% csrf_token %}
+            {{ email_login_form.as_p }}
+            <button class="login__next login__email">
+                Далі
+            </button>
+        </form>
+
+        <span class="login__else">або</span>
+        <button class="login__another login__number" id="login__number-button"
+            onclick="loginDisplayNone('block', 'none')">
+            Увійти по email
+        </button>
+        <button class="login__another login__email" id="login__email-button"
+            onclick="loginDisplayNone('none', 'block')">
+            Увійти по телефону
+        </button>
+        <button class="login__link" onclick="showRegister()">Зареєструватися</button>
+        {% if request.user.is_authenticated %}
+        <p><a class="login__link" href="{% url 'logout' %}">Вийти з акаунту</a></p>
+        {% endif %}
+    </div>
+
+    <div class="register__menu" id="register__menu">
+        <a href="{% provider_login_url 'google' method='oauth2' %}">Google</a>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <span class="register__title">Реєстрація</span>
+            {{ register_form.as_p }}
+            
+            <button class="register__next">
+                Далі
+            </button>
+        </form>
+        <div class="register_doble-link">
+            <button class="register__link" onclick="closeRegister()">Увійти</button>
+            {% if request.user.is_authenticated %}
+            <p><a class="login__link" href="{% url 'logout' %}">Вийти з акаунту</a></p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
