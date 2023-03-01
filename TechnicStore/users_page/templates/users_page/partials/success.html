@@ -1,0 +1,11 @@
+{% if success %}
+<div class="success" id="success">
+    <div class="success_text">
+        {% for succed in success %}
+            {{succed}}
+        {% endfor %}  
+    </div>
+
+    <div class="success_line"></div>
+</div>
+{% endif %}

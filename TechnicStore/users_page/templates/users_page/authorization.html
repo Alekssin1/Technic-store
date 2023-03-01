@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} 
+Main
+{% endblock %}
+
+{% block content %} 
+<body class="body__background" id="body__background">
+
+    {% include "users_page/partials/error.html" %}
+
+    {% include "partials/topBar.html" %}
+
+    {% include "users_page/partials/success.html" %}
+
+    <div class="bin" id="bin">
+        {%  include "users_page/partials/bin.html" %}
+    </div>
+     
+    <main class="main">
+        <div class="container">
+            <div class="advertising">
+                <div class="slider">
+                    <div class="slider__item">
+                        <img data-lazy="{% static 'img/temp/advertising/5ed56ae7ebad5.jpg'%}" src="" alt="advertising">
+                    </div>
+                    <div class="slider__item">
+                        <img data-lazy="{% static 'img/temp/advertising/610cde46435e5f76ea6f712029429bbac8e51e3f.jpg'%}" src="" alt="advertising">
+                    </div>
+                    <div class="slider__item">
+                        <img data-lazy="{% static 'img/temp/advertising/a1e92522ea9f6b6c1e5c2ff471bd4a083f81448f.png'%}" src="" alt="advertising">
+                    </div>
+                    <div class="slider__item">
+                        <img data-lazy="{% static 'img/temp/advertising/ms-surface-wallpaper-sixnfive-2.jpg'%}" src="" alt="advertising">
+                    </div>
+                    <div class="slider__item">
+                        <img data-lazy="{% static 'img/temp/advertising/ms-surface-wallpaper-sixnfive-4.jpg'%}" src="" alt="advertising">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="companies">
+        <div class="container">
+            <nav class="brands">
+                <ul class="d-flex align-items-center justify-content-between">
+                    <li class="brands__link list-unstyled" >
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/apple.svg'%}" alt="apple" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/samsung.svg'%}" alt="samsung" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/asus.svg'%}" alt="asus" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/lenovo.svg'%}" alt="lenovo" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/jbl.svg'%}" alt="jbl" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/realme.svg'%}" alt="realme" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/sony.svg'%}" alt="sony" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/xiaomi.svg'%}" alt="xiaomi" draggable="false">
+                        </a>
+                    </li>
+                    <li class="brands__link list-unstyled">
+                        <a href="" draggable="false">
+                            <img src="{% static 'img/svg/brandsLogo/all.svg'%}" alt="all" draggable="false">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+
+    <section class="catalog">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="catalog__col d-flex  flex-column position-relative">
+                        <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img" draggable="false">
+                        <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                            Console</a>
+
+                        <div class="d-flex catalog__buy justify-content-end align-items-center">
+                            <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                    alt="UAN" draggable="false"></span>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division" draggable="false">
+                            </button>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false">
+                            </button>
+                        </div>
+                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                            <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                        </button>
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="catalog__col d-flex  flex-column position-relative">
+                        <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img" draggable="false">
+                        <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                            Console</a>
+
+                        <div class="d-flex catalog__buy justify-content-end align-items-center">
+                            <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                    alt="UAN" draggable="false"></span>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division" draggable="false">
+                            </button>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false">
+                            </button>
+                        </div>
+                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                            <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                        </button>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="catalog__col d-flex  flex-column position-relative">
+                        <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img" draggable="false">
+                        <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                            Console</a>
+
+                        <div class="d-flex catalog__buy justify-content-end align-items-center">
+                            <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                    alt="UAN" draggable="false"></span>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division" draggable="false">
+                            </button>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false">
+                            </button>
+                        </div>
+                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                            <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                        </button>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="catalog__col d-flex  flex-column position-relative">
+                        <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img" draggable="false">
+                        <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                            Console</a>
+
+                        <div class="d-flex catalog__buy justify-content-end align-items-center">
+                            <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                    alt="UAN" draggable="false"></span>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division" draggable="false">
+                            </button>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false">
+                            </button>
+                        </div>
+                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                            <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                        </button>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="catalog__col d-flex  flex-column position-relative">
+                        <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img" draggable="false">
+                        <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                            Console</a>
+
+                        <div class="d-flex catalog__buy justify-content-end align-items-center">
+                            <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                    alt="UAN" draggable="false"></span>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division" draggable="false">
+                            </button>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false">
+                            </button>
+                        </div>
+                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                            <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                        </button>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="catalog__col d-flex  flex-column position-relative">
+                        <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img" draggable="false">
+                        <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                            Console</a>
+
+                        <div class="d-flex catalog__buy justify-content-end align-items-center">
+                            <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                    alt="UAN" draggable="false"></span>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division" draggable="false">
+                            </button>
+                            <button class="border-0 button__catalog">
+                                <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false">
+                            </button>
+                        </div>
+                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                            <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+{% endblock %}
+
+{% block scripts %} 
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js'%}"></script>
+<script type="module" src="{% static 'js/mainOnclick.js'%}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/slick.min.js'%}"></script>
+<script src="{% static 'js/slider__main.js'%}"></script>
+<script src="{% static 'js/hide.js'%}"></script>
+<script src="{% static 'js/hide_bin.js'%}"></script>
+{% endblock %}
