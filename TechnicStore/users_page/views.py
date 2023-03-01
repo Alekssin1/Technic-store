@@ -33,8 +33,8 @@ def logout_acc(request):
 
 
 def addbin(request, id):
-    return HttpResponse("addbin")
+    return HttpResponse(f"addbin {id}")
 
 
 def del_bin_item(request, id):
-    return HttpResponse("del_bin_item")
+    return HttpResponse(f"del_bin_item {id}")
