@@ -22,7 +22,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9%hqx6__9-$al%0*196jg@%h-gykq_b8+=$5tsat0h4f5!-*-5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,11 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'catalog.apps.CatalogConfig'
-=======
+    'catalog.apps.CatalogConfig',
     'users_page.apps.UsersPageConfig',
->>>>>>> 3cbe19ba8c888219a8bc9988f3f747a7c8da5725
 ]
 
 MIDDLEWARE = [
