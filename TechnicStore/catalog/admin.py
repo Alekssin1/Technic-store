@@ -28,9 +28,14 @@ class ProductAttributesAdmin(admin.ModelAdmin):
 
 
 class ProductsTypeAdmin(admin.ModelAdmin):
-    list_display = ('type', 'attributes')
+    list_display = ('type', 'get_characteritic')
     list_display_links = ('type', )
     search_fields = ('type', )
+
+    def get_characteritic(self, obj):
+        return "\n".join([c.attribute for c in obj.characteristic.all()])
+
+    get_characteritic.short_description = 'Характеристики'
 
 
 class ProductsBrandAdmin(admin.ModelAdmin):

@@ -19,6 +19,7 @@ class ValueProductAttributes(models.Model):
 
     class Meta:
         verbose_name = "Дані про характеристику товару"
+        verbose_name_plural = "Дані про характеристику товару"
 
     def __str__(self):
         return self.value
