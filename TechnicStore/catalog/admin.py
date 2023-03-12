@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from catalog.models import Products, ProductsBrand, ProductsType, ProductsImg
+from catalog.models import Products, ProductsBrand, ProductsType, ProductsImg, ProductAttributes, ValueProductAttributes
 
 
 class ProductsImgAdmin(admin.ModelAdmin):
@@ -15,8 +15,20 @@ class ProductsImgAdmin(admin.ModelAdmin):
     get_img.short_description = 'Зображення'
 
 
+class ValueProductAttributesAdmin(admin.ModelAdmin):
+    list_display = ('value', )
+    list_display_links = ('value', )
+    search_fields = ('value', )
+
+
+class ProductAttributesAdmin(admin.ModelAdmin):
+    list_display = ('attribute', 'value')
+    list_display_links = ('attribute', )
+    search_fields = ('attribute', )
+
+
 class ProductsTypeAdmin(admin.ModelAdmin):
-    list_display = ('type', )
+    list_display = ('type', 'attributes')
     list_display_links = ('type', )
     search_fields = ('type', )
 
@@ -53,3 +65,5 @@ admin.site.register(Products, ProductsAdmin)
 admin.site.register(ProductsBrand, ProductsBrandAdmin)
 admin.site.register(ProductsType, ProductsTypeAdmin)
 admin.site.register(ProductsImg, ProductsImgAdmin)
+admin.site.register(ProductAttributes, ProductAttributesAdmin)
+admin.site.register(ValueProductAttributes, ValueProductAttributesAdmin)
