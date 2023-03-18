@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users_page.models import User
+from users_page.models import User, Bin
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -12,4 +12,9 @@ class UserAdmin(admin.ModelAdmin):
     filter_horizontal = ('like', 'comparison')
 
 
+class BinAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'count',)
+    list_display_links = ('id', 'product', 'count', )
+    
 admin.site.register(User, UserAdmin)
+admin.site.register(Bin, BinAdmin)
