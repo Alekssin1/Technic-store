@@ -16,13 +16,13 @@ class ProductsImgAdmin(admin.ModelAdmin):
 
 
 class ValueProductAttributesAdmin(admin.ModelAdmin):
-    list_display = ('value', )
+    list_display = ('id', 'value', )
     list_display_links = ('value', )
     search_fields = ('value', )
 
 
 class ProductAttributesAdmin(admin.ModelAdmin):
-    list_display = ('attribute', 'value')
+    list_display = ('id', 'attribute',)
     list_display_links = ('attribute', )
     search_fields = ('attribute', )
 

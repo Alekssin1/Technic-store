@@ -1,5 +1,4 @@
-{% load socialaccount %}
-{% providers_media_js %}
+
 <div class="login" id="login">
     <div class="login__menu" id="login__menu">
         <span class="login__title">Вхід</span>
@@ -39,7 +38,7 @@
     </div>
 
     <div class="register__menu" id="register__menu">
-        <a href="{% provider_login_url 'google' method='oauth2' %}">Google</a>
+   
         <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
             <span class="register__title">Реєстрація</span>

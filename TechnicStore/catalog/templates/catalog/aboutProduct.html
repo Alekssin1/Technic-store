@@ -1,0 +1,429 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} 
+About
+{% endblock %}
+
+{% block content %} 
+<body class="body__background">
+
+    {% include "users_page/partials/error.html" %} 
+
+    {% include "partials/topBar.html" %}
+
+    {% include "users_page/partials/success.html" %}
+
+    <div class="bin" id="bin">
+        {%  include "users_page/partials/bin.html" %}
+    </div>
+
+    <section class="navigation">
+        <div class="container">
+            <ul class="navigation_links d-flex flex-row align-items-center">
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+                    <a href="{% url 'home' %}" draggable="false" class="navigation_links_li_a">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsHomeIcon-0-2-99 pr icon-0-2-36">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M11.9125 2.375C12.3491 2.375 12.8136 2.5102 13.2 2.8L13.2341 2.82562L21.6408 10.3316C22.7542 11.2196 22.1437 13 20.7 13H20V19C20 19.5752 19.7224 20.0668 19.3946 20.3946C19.0667 20.7225 18.5752 21 18 21H15C13.7838 21 13 19.9862 13 19V15H11V19C11 19.9862 10.2161 21 8.99998 21H5.99998C4.78383 21 3.99997 19.9862 3.99997 19V13H3.29997C1.85752 13 1.24674 11.2226 2.35629 10.3339L10.6149 2.87122C10.9965 2.50354 11.4923 2.375 11.9125 2.375ZM11.9324 4.37633C11.9429 4.37767 11.9542 4.38006 11.9655 4.38367C11.973 4.38608 11.9794 4.38865 11.9845 4.39107L19.3865 11H18V18.9573C17.995 18.9643 17.9882 18.9726 17.9804 18.9804C17.9726 18.9882 17.9647 18.9947 17.9577 18.9997L15 19V13H8.99998V19H5.99998V11H4.60219L11.9324 4.37633Z">
+                            </path>
+                        </svg>
+                    </a>
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
+                        <path
+                            d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+                    <a href="" draggable="false" class="navigation_links_li_a">
+                        {{ product.type.type }}
+                    </a>
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
+                        <path
+                            d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+                    <a href="" draggable="false" class="navigation_links_li_a">
+                        {{ product.brand.brand }}
+                    </a>
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
+                        <path
+                            d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
+                        </path>
+                    </svg>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+
+    <section class="info_block">
+        <div class="container">
+            <div class="product-tabs">
+                <div class="aboba">
+                    <div class="tabs-wrapper-0-2-385 tabs-0-2-366 line-maker position-relative">
+                        <div class="container-0-2-99">
+                            <div class="dislay-flex align-items-center flex-row tabs tabs-bar-0-2-378 right-scroll">
+                                <a href="" class="active-tab-0-2-380" onclick="clickonelement(this)">Все про товар</a>
+                                <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Характеристики</a>
+                                <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Аксесуари</a>
+                                <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Фото</a>
+                                <a href="" class="active-tab-0-2-381"
+                                    onclick="clickonelement(this)"><span>Відгуки</span></a>
+                            </div>
+                            <div class="active-bar-0-2-107" id="id1"
+                                style="transition: all 0.3s ease 0s; width: 174.64px; left: 17.81px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-0-2-289">
+                    <div class="left-0-2-298 pr">
+                        <div class="container-0-2-302">
+                            <div class="current-image">
+                                <div class="d-flex justify-content-center flex-column">
+                                    <div class="slider_nav d-block">
+                                        {% for img in product.img.all %}
+                                        <div class="slider_nav__item">
+                                            <img src="{{ img.img.url }}"
+                                                alt="img"
+                                                class="preview-image">
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <span class="spanMore">
+                                        <a class="showMore" id="showMore">Ще</a>
+                                    </span>
+
+                                    <div class="showMoreSlider" id="showMoreSlider">
+                                        <div class="sliderii">
+                                            {% for img in product.img.all %}
+                                            <div class="slider__item">
+                                                <img data-lazy="{{ img.img.url }}" src="" alt="info-page">
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <svg viewBox="0 0 24 24" fill="#7c7c7c" class="ShowMoreSVG">
+                                            <path
+                                                d="M10.5858 11.9999L4.66667 6.08079C4.27615 5.69027 4.27615 5.0571 4.66667 4.66658C5.0572 4.27606 5.69036 4.27605 6.08088 4.66658L12 10.5857L17.9191 4.66658C18.3096 4.27606 18.9428 4.27606 19.3333 4.66658C19.7239 5.0571 19.7239 5.69027 19.3333 6.08079L13.4142 11.9999L19.3333 17.919C19.7239 18.3096 19.7239 18.9427 19.3333 19.3332C18.9428 19.7238 18.3096 19.7238 17.9191 19.3332L12 13.4141L6.08088 19.3332C5.69036 19.7238 5.0572 19.7238 4.66667 19.3332C4.27615 18.9427 4.27615 18.3096 4.66667 17.919L10.5858 11.9999Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="slider_nav_big">
+                                    {% for img in product.img.all %}
+                                    <div class="slider_nav__item_big">
+                                        <div class="image__cover">
+                                            <img data-lazy="{{ img.img.url }}" src=""
+                                                alt="Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital Console preview фото 1"
+                                                class="full-image">
+                                            <div class="zoom__cursor"></div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-0-2-299">
+                        <div class="right-0-2-300">
+                            <div class="containerForZoom" id="containerForZoom"></div>
+                            <div class="title">
+                                <h1>
+                                    {{ product.title }}
+                                </h1>
+                            </div>
+                            <div class="rating-code d-flex align-content-center align-text-center">
+                                <div class="rating d-flex flex-md-row align-items-baseline">
+                                    <div class="root-0-2-123 root-d0-0-2-125 d-flex align-items-baseline">
+                                        <span class="">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="rgb(255, 193, 7)"
+                                                    d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class="">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="rgb(255, 193, 7)"
+                                                    d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class=">
+                                        <svg viewBox=" 0 0 24 24">
+                                            <path fill="rgb(255, 193, 7)"
+                                                d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z">
+                                            </path>
+                                            </svg>
+                                        </span>
+                                        <span class="">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="rgb(255, 193, 7)"
+                                                    d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class="current-0-2-124 current-d1-0-2-126">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="rgb(255, 193, 7)"
+                                                    d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class="">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="rgb(221, 221, 221)"
+                                                    d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class="medium rating-number">4.0</span>
+                                    </div>
+                                </div>
+                                <div class="code">
+                                    <span>Код: </span><span class="code-number">23423</span>
+                                </div>
+                            </div>
+
+                            <div class="info-page">
+                                <div class="slideri">
+                                    {% for img in product.img.all %}
+                                    <div class="slider__item">
+                                        <img data-lazy="" src="{{ img.img.url }}" alt="info-page">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            {% if product.amount %}
+                            <span class="align-items-center description-0-2-417 descriptionGreen-0-2-418">                                    
+                                <img src="{% static 'img/svg/filter/checkMark.svg '%}" alt="" width="24" height="24">
+                                <span class="able">Є в наявності</span>
+                            </span>
+                            {% else %}
+                            <span class="align-items-center description-0-2-417 descriptionRed-0-2-418">    
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="icon icon-0-2-177 icon-0-2-31">
+                                    <path
+                                        d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z">
+                                    </path>
+                                    <path
+                                        d="M16.295 7.705C15.9056 7.31564 15.2744 7.31564 14.885 7.705L12 10.59L9.115 7.705C8.72564 7.31564 8.09436 7.31564 7.705 7.705C7.31564 8.09436 7.31564 8.72564 7.705 9.115L10.59 12L7.705 14.885C7.31564 15.2744 7.31564 15.9056 7.705 16.295C8.09436 16.6844 8.72564 16.6844 9.115 16.295L12 13.41L14.885 16.295C15.2744 16.6844 15.9056 16.6844 16.295 16.295C16.6844 15.9056 16.6844 15.2744 16.295 14.885L13.41 12L16.295 9.115C16.6844 8.72564 16.6844 8.09436 16.295 7.705Z">
+                                    </path>
+                                </svg>
+                                <span class="able">Немає в наявності</span>
+                            </span>
+                            {% endif %}
+                        </div>
+                        <div class="price">
+                            <span class="catalog__price catalog__price_about price-sign">{{ product.price }} ₴</span>
+                        </div>
+                        <button
+                        hx-post="{% url 'addBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML"
+                        onclick="countPlus()"
+                            class="df jcc bd0 cup on aic uppercase medium df buyButton-0-2-350 buy-0-2-407 root-0-2-165 root-d82-0-2-464 large-0-2-175 contained-0-2-173 full-width"><svg
+                                viewBox="0 0 24 24" fill="currentColor" class="icon-0-2-166 mr8 icon-0-2-31">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M10.5547 2.16806C11.0142 2.47441 11.1384 3.09528 10.8321 3.55481L7.20184 9.00012H16.7982L13.168 3.55481C12.8616 3.09528 12.9858 2.47441 13.4453 2.16806C13.9048 1.8617 14.5257 1.98588 14.8321 2.44541L19.2019 9.00014H22C22.55 9.00014 23 9.45014 23 10.0001L22.97 10.2701L20.43 19.5401C20.19 20.3801 19.42 21.0001 18.5 21.0001H5.5C4.58 21.0001 3.81 20.3801 3.58 19.5401L1.04 10.2701C1.01 10.1801 1 10.0901 1 10.0001C1 9.45014 1.45 9.00014 2 9.00014H4.79813L9.16795 2.44541C9.4743 1.98588 10.0952 1.8617 10.5547 2.16806ZM18.5 19.0001L5.51 19.0101L3.31 11.0001H20.7L18.5 19.0001Z">
+                                </path>
+                            </svg><span>Купити</span>
+                        </button>
+                        <div class="dg mt32 container-0-2-419">
+                            <button class="on bd0 df cup button-0-2-420 add-favorite" type="button">
+                                <div id="containerIcon-0-2-421"
+                                    class="df aic jcc br10 mr16 containerIcon-0-2-421 add-favorite"><svg
+                                        viewBox="0 0 24 24" fill="currentColor" class="icons add-favorite icon-0-2-31">
+                                        <path
+                                            d="M16.5 3C14.76 3 13.09 3.81 12 5.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5C2 12.28 5.4 15.36 10.55 20.04L10.6541 20.1341C11.4178 20.824 12.5803 20.8218 13.3413 20.129L13.45 20.03C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3ZM12.1 18.55L12 18.65L11.9 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 5.99 11.07 7.36H12.94C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55Z">
+                                        </path>
+                                    </svg></div>
+                                <div class="df aic fz12 text-0-2-426 add-favorite"><span class="add-favorite">У 5289
+                                        осіб</span><span id="add-favorite" class="add-favorite textLink-0-2-427">в
+                                        обраному</span></div>
+                            </button>
+                            <button class="on bd0 df cup button-0-2-420 add-compare" type="button">
+                                <div id="containerIcon-0-2-422"
+                                    class="df aic jcc br10 mr16 containerIcon-0-2-421 add-compare"><svg
+                                        viewBox="0 0 24 24" fill="currentColor" class="icons icon-0-2-31">
+                                        <path
+                                            d="M9.26709 4C9.68709 2.8 10.8171 2 12.0871 2C13.3571 2 14.4871 2.8 14.9171 4H20.0871C20.6394 4 21.0871 4.44772 21.0871 5C21.0871 5.55228 20.6394 6 20.0871 6H19.1371L22.0871 13C22.6471 15 21.0871 16 18.5871 16C16.0871 16 14.6171 15 15.0871 13L18.0371 6H14.9071C14.5871 6.85 13.9371 7.5 13.0871 7.82C13.0871 7.82 12.3905 7.99805 12 8C11.6095 8.00195 11.0871 7.83 11.0871 7.83C10.2371 7.5 9.58709 6.85 9.25709 6H6.13709L9.08709 13C9.64709 15 8.08709 16 5.58709 16C3.08709 16 1.61709 15 2.08709 13L5.03709 6H4.08709C3.53481 6 3.08709 5.55228 3.08709 5C3.08709 4.44772 3.53481 4 4.08709 4H9.26709ZM12.7942 4.29289C12.6067 4.10536 12.3523 4 12.0871 4C11.8219 4 11.5675 4.10536 11.38 4.29289C11.1924 4.48043 11.0871 4.73478 11.0871 5C11.0871 5.26522 11.1924 5.51957 11.38 5.70711C11.5675 5.89464 11.8219 6 12.0871 6C12.3523 6 12.6067 5.89464 12.7942 5.70711C12.9817 5.51957 13.0871 5.26522 13.0871 5C13.0871 4.73478 12.9817 4.48043 12.7942 4.29289ZM7.08709 13L5.58709 9.25L4.08709 13H7.08709ZM20.0871 13L18.5871 9.25L17.0871 13H20.0871Z">
+                                        </path>
+                                        <path
+                                            d="M4.08709 19C3.53481 19 3.08709 19.4477 3.08709 20C3.08709 20.5523 3.53481 21 4.08709 21H20.0871C20.6394 21 21.0871 20.5523 21.0871 20C21.0871 19.4477 20.6394 19 20.0871 19H4.08709Z">
+                                        </path>
+                                    </svg></div>
+                                <div class="df aic fz12 text-0-2-426 add-compare">
+                                    <span id="add-compare" class="add-compare textLink-0-2-427">Додати</span>
+                                    <span id="add-compare1" class="add-compare textLink-0-2-427">в порівняння</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="d-flex align-content-center justify-content-between delivery">
+                            Доставка
+                        </div>
+                        <div class="fz12">
+                            <div class="mt16 title-0-2-430"><button class="link bd0 cup" type="button">Київ</button>
+                            </div>
+                            <div class="mt16 d-grid align-items-center delivery-0-2-435"><a class="link"
+                                    href="">Самовивіз з наших
+                                    магазинів</a>
+                                <div class="currency-0-2-436 free-0-2-437">Безкоштовно</div>
+                                <div class="pr">
+                                    <div class="d-sm-inline-block position-relative">
+
+                                        <div class="info position-relative" data-modal-text=" <h5>САМОВИВІЗ З НАШИХ МАГАЗИНІВ</h5>
+                                            <br>
+                                            <span>
+                                                При оформленні замовлення оператор контакт-центру уточнює зручне для
+                                                вас місце і час приїзду за покупкою. Доставка замовленого товару до
+                                                магазину здійснюється безкоштовно.
+                                            </span>">
+                                            <svg viewBox="0 0 24 24" fill="currentColor"
+                                                class="icon iconInfo-0-2-439 icon-0-2-31">
+                                                <path d="M13 7L11 7L11 9L13 9L13 7Z"></path>
+                                                <path
+                                                    d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12L11 16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16L13 12Z">
+                                                </path>
+                                                <path
+                                                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z">
+                                                </path>
+                                            </svg>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt16 d-grid align-items-center delivery-0-2-435">
+                                <div>Кур'єр за вашою адресою за 2 години</div>
+                                <div class="currency-0-2-436">100 ₴</div>
+                                <div class="pr">
+                                    <div class="dib position-relative">
+                                        <div class="info position-relative" data-modal-text="<h6>КУР'ЄР ЗА ВАШОЮ АДРЕСОЮ ЗА 2 ГОДИНИ</h6>
+                                            <br>
+                                            <span>
+                                                Швидка доставка кур'єром за адресою за 2 години (тільки Київ). Доставка
+                                                доступна для замовлень оброблених з 9:00 до 17:00. Тільки малогабаритні
+                                                товари. Вартість 100 грн.
+                                            </span>">
+                                            <svg viewBox="0 0 24 24" fill="currentColor"
+                                                class="icon iconInfo-0-2-439 icon-0-2-31">
+                                                <path d="M13 7L11 7L11 9L13 9L13 7Z"></path>
+                                                <path
+                                                    d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12L11 16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16L13 12Z">
+                                                </path>
+                                                <path
+                                                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt16 d-grid align-items-center delivery-0-2-435">
+                                <div>Доставка у вiддiлення / поштомат "Нова пошта"</div>
+                                <div class="currency-0-2-436">Згідно з тарифами перевізника</div>
+                                <div class="pr">
+                                    <div class="dib position-relative">
+                                        <div class="info position-relative" data-modal-text=" <h6>ДОСТАВКА У ВIДДIЛЕННЯ / ПОШТОМАТ 'НОВА
+                                            ПОШТА'</h6>
+                                            <br>
+                                            <span>
+                                                Вартість доставки розраховується згідно з тарифами 'Нової пошти'.
+                                                Терміни доставки до відділення «Нової Пошти» 1 - 3 дні. Після відправки
+                                                замовлення ви отримаєте SMS-повідомлення з номером експрес-накладної.
+                                            </span>">
+                                            <svg viewBox="0 0 24 24" fill="currentColor"
+                                                class="icon iconInfo-0-2-439 icon-0-2-31">
+                                                <path d="M13 7L11 7L11 9L13 9L13 7Z"></path>
+                                                <path
+                                                    d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12L11 16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16L13 12Z">
+                                                </path>
+                                                <path
+                                                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt16 d-flex align-items-center newPostInformer-0-2-440"><svg viewBox="0 0 24 24"
+                                    fill="currentColor" class="icon iconInformer-0-2-441 icon-0-2-31">
+                                    <path
+                                        d="M1.86914 19.499C1.48318 20.1656 1.96424 21 2.73457 21H21.2657C22.036 21 22.5171 20.1656 22.1311 19.499L12.8655 3.49483C12.4804 2.82954 11.5199 2.82954 11.1347 3.49483L1.86914 19.499ZM13.0001 18H11.0001V16H13.0001V18ZM13.0001 14H11.0001V10H13.0001V14Z">
+                                    </path>
+                                </svg>
+                                <div>Оплата доставки проводиться у відділенні НП за тарифами перевізника. Оператор
+                                    зв’яжеться з вами і точно сповістить про можливість доставки вашого замовлення.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="paymentsContainer-0-2-446">
+                            <div>
+                                <p class="paymentsTitle-0-2-447">Приймаємо</p>
+                                <div class="d-flex paymentsMethods-0-2-448">
+                                    <div class="d-flex jcc aic br10 mb16 paymentsItem-0-2-449"><img
+                                            src="https://i.citrus.world/uploads/promo/PaymentMethods/google-pay-logo.svg"
+                                            alt="GooglePay"></div>
+                                    <div class="d-flex jcc aic br10 mb16 paymentsItem-0-2-449"><img
+                                            src="https://i.citrus.world/uploads/promo/PaymentMethods/apple-pay-logo.svg"
+                                            alt="ApplePay"></div>
+                                    <div class="d-flex jcc aic br10 mb16 paymentsItem-0-2-449"><img
+                                            src="https://i.citrus.world/uploads/promo/PaymentMethods/privat-pay-logo.svg"
+                                            alt="PrivatPay"></div>
+                                    <div class="d-flex jcc aic br10 mb16 paymentsItem-0-2-449"><img
+                                            src="https://i.citrus.world/uploads/promo/PaymentMethods/visa-card-logo.svg"
+                                            alt="Visa"></div>
+                                    <div class="d-flex jcc aic br10 mb16 paymentsItem-0-2-449"><img
+                                            src="https://i.citrus.world/uploads/promo/PaymentMethods/master-card-logo.svg"
+                                            alt="Mastercard"></div>
+                                    <div class="d-flex jcc aic br10 mb16 paymentsItem-0-2-449"><img
+                                            src="https://i.citrus.world/uploads/promo/PaymentMethods/mono-bank-logo.svg"
+                                            alt="Monobank"></div>
+                                    <div class="d-flex jcc aic br10 mb16 paymentsItem-0-2-449"><img
+                                            src="https://i.citrus.world/uploads/promo/PaymentMethods/privaty-credit-logo.svg"
+                                            alt="Privat Pieces"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex warrantyContainer-0-2-243">
+                            <div class="position-relative br10 fz14 item-0-2-244 warranty-0-2-245">Гарантія
+                                <span>12 міс.
+                                </span>
+                            </div>
+                            <div class="position-relative br10 fz14 item-0-2-244 exchange-0-2-246"><span>14 днів</span>
+                                обмін/повернення</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</body>
+{% endblock %}
+
+
+{% block scripts %} 
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js'%}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="module" src="{% static 'js/mainOnclick.js'%}"></script>
+<script src="{% static 'js/slick.min.js'%}"></script>
+<script src="{% static 'js/slider__info.js'%}"></script>
+<script src="{% static 'js/zoomInfo.js'%}"></script>
+<script type="module" src="{% static 'js/info.js'%}"></script>
+<script src="{% static 'js/hide.js'%}"></script>
+<script src="{% static 'js/price__space.js' %}"></script>
+<script src="{% static 'js/hide_bin.js'%}"></script>
+<script src="{% static 'js/reload_with_htmx.js'%}"></script>
+{% endblock %}

@@ -14,6 +14,7 @@ class ProductsImg(models.Model):
 
 
 class ValueProductAttributes(models.Model):
+    
     value = models.CharField(
         max_length=60, verbose_name="Дані про характеристику товару")
 
@@ -23,13 +24,13 @@ class ValueProductAttributes(models.Model):
 
     def __str__(self):
         return self.value
+    
 
 
 class ProductAttributes(models.Model):
     attribute = models.CharField(
         max_length=150, verbose_name="Характеристика товару")
-    value = models.ForeignKey(ValueProductAttributes,
-                              on_delete=models.CASCADE,)
+    value = models.ManyToManyField(ValueProductAttributes)
 
     class Meta:
         verbose_name = 'Характеристика товару'
@@ -71,7 +72,7 @@ class Products(models.Model):
     price = models.DecimalField(
         max_digits=10, decimal_places=0, verbose_name='Ціна')
     discount = models.DecimalField(
-        max_digits=10, decimal_places=0, verbose_name='Ціна зі знижкою', default=None)
+        max_digits=10, decimal_places=0, verbose_name='Ціна зі знижкою', default=None, blank=True, null=True)
     img = models.ManyToManyField(ProductsImg, verbose_name='Зображення')
     type = models.ForeignKey(
         ProductsType, on_delete=models.CASCADE, verbose_name='Тип товару')

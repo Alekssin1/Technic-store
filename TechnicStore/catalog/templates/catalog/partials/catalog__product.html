@@ -1,0 +1,36 @@
+{% load static %}
+<div class="catalog__product" id="catalog__product">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6">
+            <div class="catalog__col d-flex  flex-column position-relative">
+                {% if product.img__img %}
+                <img src="/{{product.img__img}}" alt="catalog__photo" class="catalog__img" draggable="false">
+                {% else %}
+                <img src="{{product.img.all.0.img.url}}" alt="catalog__photo" class="catalog__img" draggable="false">
+                {% endif %}
+                <a href="{% url 'aboutProduct' product.id%}" class="catalog__name">{{ product.title }}</a>
+                <div class="d-flex catalog__buy justify-content-end align-items-center">
+                    <span class="catalog__price">{{ product.price }} ₴</span>
+                    <button class="border-0 button__catalog">
+                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division" draggable="false">
+                    </button>
+                        <button class="border-0 button__catalog"
+                        hx-post="{% url 'addBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
+                            <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false" onclick="countPlus()">
+                        </button>
+                </div>
+                <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                    <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+        {% if not products %}
+        <div class="not_product">Нажаль на даний момент даного товару не існує :(</div>
+        {% endif %}
+    </div>
+</div>
+
+<span id="new_sort" style="display: none;">{{sort}}</span>
+<script src="{% static 'js/catalog.js'%}"></script>

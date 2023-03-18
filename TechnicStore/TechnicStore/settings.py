@@ -57,7 +57,7 @@ ROOT_URLCONF = 'TechnicStore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,6 +109,8 @@ AUTH_USER_MODEL = "users_page.User"
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
+LOGIN_REDIRECT_URL = '/'
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -117,11 +119,22 @@ USE_I18N = True
 
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIR = ( '/var/www/html/static', )
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn')
+
+MEDIA_URL = ''
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
