@@ -9,7 +9,7 @@ class User(AbstractUser):
     phone = PhoneNumberField(null=False, blank=False,
                              unique=False, verbose_name='Телефон')
     basket = models.ManyToManyField(
-        'catalog.Products', related_name='bin', verbose_name='Кошик')
+        'Bin', related_name='bin', verbose_name='Кошик')
     like = models.ManyToManyField(
         'catalog.Products', related_name='like', verbose_name='Товари що сподобалися')
     comparison = models.ManyToManyField(
@@ -22,3 +22,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.first_name}'
+
+
+class Bin(models.Model):
+    product = models.ForeignKey(
+        'catalog.Products', on_delete=models.CASCADE, verbose_name='Кошик')
+    count = models.IntegerField(verbose_name='кількість')
