@@ -28,3 +28,4 @@ class Bin(models.Model):
     product = models.ForeignKey(
         'catalog.Products', on_delete=models.CASCADE, verbose_name='Кошик')
     count = models.IntegerField(verbose_name='кількість')
+
