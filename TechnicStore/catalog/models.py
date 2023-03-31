@@ -80,6 +80,18 @@ class Products(models.Model):
         ProductsBrand, on_delete=models.CASCADE, verbose_name='Бренд')
     amount = models.PositiveSmallIntegerField(
         default=0, verbose_name='Кількість товару')
+    procesor = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='процесор', related_name="procesor")
+    internal_memory = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name="Внутрішня пам'ять", related_name="internal_memory")
+    color = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Колір', related_name="color")
+    number_SIM = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Кількість SIM-карт', related_name="Number_SIM")
+    working_memory = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Оперативна', related_name="working_memory")
+    screen_diagonal = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Діагональ екрану', related_name="screen_diagonal")
+    screen_type = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Тип екрану', related_name="screen_type")
+    screen_resolution = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Роздільна здатність екрану', related_name="screen_resolution")
+    main_camera = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Основна камера', related_name="main_camera")
+    front_camera = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Фронтальна камера', related_name="front_camera")
+    battery_capacity = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Ємність аккумулятора', related_name="battery_capacity")
+
 
     class Meta:
         verbose_name = 'Товари'

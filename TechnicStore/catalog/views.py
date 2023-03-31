@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 
 from .utils import CatalogMixin
-from .models import Products, ProductsBrand
+from .models import Products, ProductsBrand, ValueProductAttributes
 from django.urls import reverse
 
 
@@ -42,13 +42,37 @@ class ProductComparison(ListView):
 
     
 class FilterProductsJson(CatalogMixin, DetailView):
+    
+    def get_query(self, attribute_in_db, attribute_name, all_attributes):
+        if not self.request.GET.get(attribute_name, False):
+            return Q(**{f"{attribute_in_db}__value__in": all_attributes})
+        else:
+            return Q(**{f"{attribute_in_db}__value__in": self.request.GET.getlist(attribute_name)})
+    
+    
     def get_queryset(self):
         type = self.kwargs.get("type")
         all_brands = [i.brand for i in ProductsBrand.objects.all()]
+        all_ValueProductAttributes = [i.value for i in ValueProductAttributes.objects.all()]
+        
         if not self.request.GET.get("brand", False):
             brand =  Q(brand__brand__in=all_brands)
         else:
             brand = Q(brand__brand__in=self.request.GET.getlist('brand'))
+            
+       
+        procesor = self.get_query('procesor', "Процесор", all_ValueProductAttributes)
+        internal_memory = self.get_query('internal_memory', "Внутрішня пам'ять", all_ValueProductAttributes)
+        color = self.get_query('color', "Колір", all_ValueProductAttributes)
+        number_SIM = self.get_query('number_SIM', "Кількість SIM-карт", all_ValueProductAttributes)
+        working_memory = self.get_query('working_memory', "Внутрішня пам'ять", all_ValueProductAttributes)
+        screen_diagonal = self.get_query('screen_diagonal', "Діагональ екрану", all_ValueProductAttributes)
+        screen_type = self.get_query('screen_type', "Тип екрану", all_ValueProductAttributes)
+        screen_resolution = self.get_query('screen_resolution', "Роздільна здатність екрану", all_ValueProductAttributes)
+        main_camera = self.get_query('main_camera', "Основна камера", all_ValueProductAttributes)
+        front_camera = self.get_query('front_camera', "Фронтальна камера", all_ValueProductAttributes)
+        battery_capacity = self.get_query('battery_capacity', "Ємність аккумулятора", all_ValueProductAttributes)
+        
       
         if self.request.GET.getlist('price_up'):
             sort = 'price'
@@ -60,9 +84,21 @@ class FilterProductsJson(CatalogMixin, DetailView):
             sort = 'id'
             sort_text = 'за популярністю'
             
-        query = Products.objects.filter(Q(type__type=type) &
-            brand &
-            Q(price__gte=self.request.GET.get('price_start'), price__lte=self.request.GET.get('price_end'))
+        query = Products.objects.filter(
+            Q(type__type=type) 
+            & brand 
+            & Q(price__gte=self.request.GET.get('price_start'), price__lte=self.request.GET.get('price_end')) 
+            & procesor
+            & internal_memory
+            & color
+            & number_SIM
+            & working_memory
+            & screen_diagonal
+            & screen_type
+            & screen_resolution
+            & main_camera
+            & front_camera
+            & battery_capacity
             ).prefetch_related('img').values('title', 'price', 'img__img', 'id').distinct().order_by(sort)
     
         return query, sort_text

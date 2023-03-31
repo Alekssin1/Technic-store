@@ -50,7 +50,9 @@ class ProductsAdmin(admin.ModelAdmin):
     list_editable = ['amount']
     search_fields = ('title', )
     fields = ('title', 'price', 'type', 'brand',
-              'amount', 'img', 'get_img')
+              'amount', 'img', 'get_img', 'procesor', 'internal_memory', 'color', 'number_SIM',
+              'working_memory', 'screen_diagonal', 'screen_type', 'screen_resolution', 'main_camera',
+              'front_camera', 'battery_capacity')
     readonly_fields = ('get_img', )
     filter_horizontal = ('img',)
 
