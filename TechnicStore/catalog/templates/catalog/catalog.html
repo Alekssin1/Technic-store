@@ -52,7 +52,7 @@ Catalog
         </div>
     </section>
 
-    <form hx-get="{% url 'filter_ajax' %}" hx-target="#catalog__product" hx-swap="outerHTML" >
+    <form hx-get="{% url 'filter_ajax' type %}" hx-target="#catalog__product" hx-swap="outerHTML" >
     <section class="sorting">
         <div class="container">
             <div class="catalog__palce">
@@ -180,9 +180,9 @@ Catalog
                             <div class="hidden">
                                 {% endif %}
                                 <button class="on_checkbox-button">
-                                    <input  type="checkbox" class="custom-checkbox" id="{{ brand.brand }}-mobile" name="brand"
-                                        value="{{ brand.brand }}">
-                                    <label type="submit" for="{{ brand.brand }}-mobile">{{ brand.brand }}</label>
+                                    <input  type="checkbox" class="custom-checkbox" id="{{ brand }}-mobile" name="brand"
+                                        value="{{ brand }}">
+                                    <label type="submit" for="{{ brand }}-mobile">{{ brand }}</label>
                                 </button>
                             </div>
                             {% endfor %}
@@ -204,8 +204,54 @@ Catalog
                     
 
                     <hr>
+                    
+                    {% for filter in filters %}
+                        <div class="filter__title d-flex justify-content-between align-items-center"
+                            id="brands__filter__title">
+                            <span>{{filter.attribute}}</span>
+                            <svg viewBox="0 0 24 24" fill="#515151" id="brands__filter__svg">
+                                <path
+                                    d="M17.2946 9.29462C16.9053 8.90534 16.2743 8.905 15.8846 9.29385L12 13.17L8.11538 9.29385C7.72569 8.905 7.09466 8.90534 6.70538 9.29462C6.31581 9.68419 6.31581 10.3158 6.70538 10.7054L12 16L17.2946 10.7054C17.6842 10.3158 17.6842 9.68419 17.2946 9.29462Z">
+                                </path>
+                            </svg>
+                        </div>
 
-                    <div class="filter__title d-flex justify-content-between align-items-center"
+                        <div id="brands__filter__content">
+
+                            <div class="filter__content flex-column justify-content-center checkbox__brands">
+                                {% for value in filter.value.all %}
+                                {% if forloop.counter <= 5%}
+                                <div class="box-always">
+                                {% else %}
+                                <div class="hidden">
+                                    {% endif %}
+                                    <button class="on_checkbox-button">
+                                        <input  type="checkbox" class="custom-checkbox" id="{{ value.value }}-mobile" name="{{value.value}}"
+                                            value="{{ value.value }}">
+                                        <label type="submit" for="{{ value.value }}-mobile">{{ value.value }}</label>
+                                    </button>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+
+                            <div class="more brands__mobile">
+                                <button class="more__button">
+                                    <span class="show__more" id="show__more__mobile">Показати всі</span>
+                                    <span class="close" id="close__mobile">Згорнути</span>
+                                </button>
+                                <svg viewBox="0 0 24 24" fill="#515151" class="more__SVG" id="more__SVG__mobile">
+                                    <path
+                                        d="M17.2946 9.29462C16.9053 8.90534 16.2743 8.905 15.8846 9.29385L12 13.17L8.11538 9.29385C7.72569 8.905 7.09466 8.90534 6.70538 9.29462C6.31581 9.68419 6.31581 10.3158 6.70538 10.7054L12 16L17.2946 10.7054C17.6842 10.3158 17.6842 9.68419 17.2946 9.29462Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+
+
+                        <hr>
+                    {% endfor %}
+                    <!-- <div class="filter__title d-flex justify-content-between align-items-center"
                         id="memoryMobile__filter__title">
                         <span>Об'єм вбудованої пам'яті</span>
                         <svg viewBox="0 0 24 24" fill="#515151" id="memoryMobile__filter__svg">
@@ -941,9 +987,9 @@ Catalog
                                 <label for="No__fast__charging">Ні</label>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
-            </div>
+            </div> 
           
             {%  include "catalog/partials/catalog__product.html" %}
             

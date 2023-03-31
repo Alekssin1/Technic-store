@@ -7,6 +7,8 @@ from django.http import HttpResponse
 
 from .utils import CatalogMixin
 from .models import Products, ProductsBrand
+from django.urls import reverse
+
 
     
 class Catalog(CatalogMixin, ListView):
@@ -39,8 +41,9 @@ class ProductComparison(ListView):
          return HttpResponse("ProductComparison")
 
     
-class FilterProductsJson(CatalogMixin, ListView):
+class FilterProductsJson(CatalogMixin, DetailView):
     def get_queryset(self):
+        type = self.kwargs.get("type")
         all_brands = [i.brand for i in ProductsBrand.objects.all()]
         if not self.request.GET.get("brand", False):
             brand =  Q(brand__brand__in=all_brands)
@@ -57,7 +60,7 @@ class FilterProductsJson(CatalogMixin, ListView):
             sort = 'id'
             sort_text = 'за популярністю'
             
-        query = Products.objects.filter(
+        query = Products.objects.filter(Q(type__type=type) &
             brand &
             Q(price__gte=self.request.GET.get('price_start'), price__lte=self.request.GET.get('price_end'))
             ).prefetch_related('img').values('title', 'price', 'img__img', 'id').distinct().order_by(sort)
@@ -107,3 +110,23 @@ class SearchProductsJson(CatalogMixin, ListView):
                 res = "По вашому запиту нічого не знайдено"
             return JsonResponse({'data': res})
         return JsonResponse({})
+
+class Catalog2(CatalogMixin, DetailView):
+    def get(self, request, *args, **kwargs):
+        type = self.kwargs.get("type")
+        context = self.renderPage()
+        context['products'] = Products.objects.all().filter(type__type=type).prefetch_related('img').only(
+            'title', 'price', 'img', 'type', 'brand', 'amount',
+        )
+        
+        brands_all = [i.brand.brand for i in context['products']]
+        brands = list(set(brands_all))
+        
+        context['brands'] = brands
+        context['sort'] = "за популярністю"
+        context['type'] = type
+        
+        context['filters'] = context['products'][0].type.characteristic.all()
+        
+        return render(request, 'catalog/catalog.html', context=context)
+        

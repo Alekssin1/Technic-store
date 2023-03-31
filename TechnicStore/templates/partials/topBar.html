@@ -18,70 +18,72 @@
 
                 <div id="myDropdown" class="dropdown-content">
                     <div class="adfd">
-                        <a href="#smartphones" class="dropdown__link">
+                      
+                        <button onclick="location.href='{% url 'catalog2' 'Смартфони' %}'" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/smartphone.svg'%}" alt="smartphones">
                             <span>Смартфони</span>
-                        </a>
-                        <a href="#televisions" class="dropdown__link">
+                        </button>
+                        <button onclick="location.href='{% url 'catalog2' 'Телевізори' %}'" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/tv.svg'%}" alt="televisions">
                             <span>Телевізори</span>
-                        </a>
-                        <a href="#cameras" class="dropdown__link">
+                        </button>
+                        <button href="#cameras" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/camera.svg'%}" alt="cameras">
                             <span>Камери</span>
-                        </a>
-                        <a href="#audio" class="dropdown__link">
+                        </button>
+                        <button href="#audio" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/audio.svg'%}" alt="audio">
                             <span>Аудіо</span>
-                        </a>
-                        <a href="#fitness" class="dropdown__link">
+                        </button>
+                        <button href="#fitness" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/fitnes.svg'%}" alt="fitness">
                             <span>Фітнес</span>
-                        </a>
-                        <a href="#gaming" class="dropdown__link">
+                        </button>
+                        <button href="#gaming" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/geyming.svg'%}" alt="gaming">
                             <span>Геймінг</span>
-                        </a>
-                        <a href="#PersonalTransport" class="dropdown__link">
+                        </button>
+                        <button href="#PersonalTransport" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/scooter.svg'%}" alt="PersonalTransport">
                             <span>Персональний транспорт</span>
-                        </a>
-                        <a href="#computers" class="dropdown__link">
+                        </button>
+                        <button href="#computers" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/computer.svg'%}" alt="computers">
                             <span>Комп'ютери та ноутбуки</span>
-                        </a>
-                        <a href="#watch" class="dropdown__link">
+                        </button>
+                        <button href="#watch" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/watch.svg'%}" alt="watch">
                             <span>Смарт годинники</span>
-                        </a>
-                        <a href="#appliances" class="dropdown__link">
+                        </button>
+                        <button href="#appliances" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/appliances.svg'%}" alt="appliances">
                             <span>Побутова техніка</span>
-                        </a>
-                        <a href="#SmartHome" class="dropdown__link">
+                        </button>
+                        <button href="#SmartHome" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/SmartHouse.svg'%}" alt="SmartHome">
                             <span>Розумний дім</span>
-                        </a>
-                        <a href="#forcars" class="dropdown__link">
+                        </button>
+                        <button href="#forcars" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/carsvg.svg'%}" alt="forcars">
                             <span>Товари для авто</span>
-                        </a>
-                        <a href="#accessories" class="dropdown__link">
+                        </button>
+                        <button href="#accessories" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/accessories.svg'%}" alt="accessories">
                             <span>Аксесуари</span>
-                        </a>
-                        <a href="#backpacks" class="dropdown__link">
+                        </button>
+                        <button href="#backpacks" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/bag.svg'%}" alt="backpacks">
                             <span>Рюкзаки та сумки</span>
-                        </a>
-                        <a href="#clothes" class="dropdown__link">
+                        </button>
+                        <button href="#clothes" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/clothes.svg'%}" alt="clothes">
                             <span>Одяг</span>
-                        </a>
-                        <a href="#children" class="dropdown__link">
+                        </button>
+                        <button href="#children" class="dropdown__link">
                             <img src="{% static 'img/svg/catalogIcon/children.svg'%}" alt="children">
                             <span>Дітям</span>
-                        </a>
+                        </button>
+                   
                     </div>
                 </div>
 
@@ -163,13 +165,17 @@
                                 </div>
 
                                 <div class="row">
+                                    
                                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">
-                                        <a href="#smartphones"
+                                        
+                                        <a href="#televisions"
                                             class="catalog__mobile__link d-flex justify-content-center align-items-center flex-column w-100">
                                             <img src="{% static 'img/svg/catalogIcon/smartphone.svg'%}" alt="smartphones">
                                             <span>Смартфони</span>
                                         </a>
+                                    
                                     </div>
+                                
                                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">
                                         <a href="#televisions"
                                             class="catalog__mobile__link d-flex justify-content-center align-items-center flex-column w-100">

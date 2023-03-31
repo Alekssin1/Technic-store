@@ -3172,3 +3172,19 @@ textarea {
 .results-card .h5, .results-card .h5:hover {
     color: #000000;
 }
+
+.dropdown__link {
+    border: none;
+    width: 100%;
+    background: none;
+}
+
+.adfd button {
+    align-items: start;
+    display: flex;
+    padding: 3px 16px;
+}
+
+.adfd button span {
+    margin-left: 5px;
+}
