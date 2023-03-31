@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 
 from users_page.forms import UserRegistrationForm, UserEmailLogin, UserPhoneLogin
+from users_page.models import Bin
 
 
 User = get_user_model()
@@ -30,7 +31,7 @@ class CatalogMixin(Notifications):
         self.temp_error = self.add_to_temp(self.errors, self.temp_error)
         self.temp_success = self.add_to_temp(self.success, self.temp_success)
         
-        bin = '' if self.request.user.is_anonymous else self.request.user.basket
+        bin = Bin.objects.filter(count=-1) if self.request.user.is_anonymous else self.request.user.basket
         
         context = {
             'register_form': user_register,
