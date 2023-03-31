@@ -134,15 +134,21 @@ const sendSearchData = (product) => {
       if (Array.isArray(data)) {
         resultsBox.innerHTML = ""
         data.forEach(product => {
+          if (url.includes("catalog")) {
+            myURL = "about/"+product.id
+          }
+          else {
+            myURL = "catalog/about/"+product.id
+          }
           resultsBox.innerHTML += `
-            <a href="catalog/about/${product.id}" class="item">
+            <a href="${myURL}" class="item">
               <div class="row mt-2 mb-2">
                 <div class="col-2">
                   <img src="${product.image}" class="product-img"></img>
                 </div>
                 <div class="col-10">
                   <h5>${product.title}</h5>
-                  <p>${product.price}</p>
+                  <p>${product.price} ₴</p>
                 </div>
               </div>
             </a>`

@@ -3168,3 +3168,7 @@ textarea {
     display: flex;
     align-items: center;
 }
+
+.results-card .h5, .results-card .h5:hover {
+    color: #000000;
+}
