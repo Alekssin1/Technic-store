@@ -10,3 +10,4 @@ urlpatterns = [
  path('addbin/<int:id>/', views.addbin, name='addBin'),
  path('dellbin/<int:id>/', views.del_bin_item, name='dellBin'),
 ]
+

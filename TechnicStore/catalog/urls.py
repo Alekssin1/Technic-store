@@ -7,4 +7,5 @@ urlpatterns = [
  path('comparison/', views.ProductComparison.as_view(), name='productComparison'),
  path('filters/', views.FilterProducts.as_view(), name='filters'),
  path('filter_ajax/', views.FilterProductsJson.as_view(), name='filter_ajax'),
+ path('search/', views.SearchProductsJson.as_view(), name='search'),
 ]

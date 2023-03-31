@@ -282,9 +282,15 @@
                 </div>
             </div>
 
+            <script src="{% static 'js/main.js' %}" defer></script>
+
             <div class="header__search d-flex">
-                <input type="search" placeholder="Пошук" class="header__input" readonly
-onfocus="this.removeAttribute('readonly')">
+                <form id="search_form" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="text" id="search-input" placeholder="Пошук" class="header__input" readonly
+                        onfocus="this.removeAttribute('readonly')">
+                </form>
+                <div class="results-card not-visible" id="results-box"></div>
             </div>
 
             <div class="header__user d-flex align-items-center">

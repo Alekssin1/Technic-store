@@ -47,3 +47,26 @@ class FilterProductsJson(ListView):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse("FilterProductsJson")
+    
+class SearchProductsJson(CatalogMixin, ListView):
+    def post(self, request, *args, **kwargs):
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            res = None
+            product = self.request.POST.get('product')
+            qs = Products.objects.filter(
+                Q(title__icontains=product) | Q(brand__brand__icontains=product))
+            if len(qs) > 0 and len(product) > 0:
+                data = []
+                for pos in qs:
+                    item = {
+                        'id': pos.pk,
+                        'title': pos.title,
+                        'price': pos.price,
+                        'image': pos.img.all()[0].img.url
+                    }
+                    data.append(item)
+                res = data
+            else:
+                res = "По вашому запиту нічого не знайдено"
+            return JsonResponse({'data': res})
+        return JsonResponse({})

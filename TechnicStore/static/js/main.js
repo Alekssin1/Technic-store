@@ -104,3 +104,69 @@ function minusProduct(id) {
   
   object.value = value;
 }
+
+const url = window.location.href;
+let newUrl = ''
+if (url.includes("catalog")) {
+  const catalogIndex = url.indexOf('/catalog/');
+  if (catalogIndex !== -1) {
+    newUrl = url.substring(0, catalogIndex) + '/catalog/search/';
+  }
+} else {
+  newUrl = 'catalog/search/';
+}
+console.log(newUrl)
+const searchForm = document.getElementById('search_form')
+const searchInput = document.getElementById('search-input')
+const resultsBox = document.getElementById('results-box')
+const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+
+const sendSearchData = (product) => {
+  $.ajax({
+    type: 'POST',
+    url: newUrl,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'product': product,
+    },
+    success: (res) => {
+      const data = res.data
+      if (Array.isArray(data)) {
+        resultsBox.innerHTML = ""
+        data.forEach(product => {
+          resultsBox.innerHTML += `
+            <a href="catalog/about/${product.id}" class="item">
+              <div class="row mt-2 mb-2">
+                <div class="col-2">
+                  <img src="${product.image}" class="product-img"></img>
+                </div>
+                <div class="col-10">
+                  <h5>${product.title}</h5>
+                  <p>${product.price}</p>
+                </div>
+              </div>
+            </a>`
+        })
+      } else {
+        if (searchInput.value.length > 0) {
+          resultsBox.innerHTML = `<b>${data}</b>`
+        } else {
+          resultsBox.classList.add('not-visible')
+        }
+      }
+
+    },
+    error: (err) => {
+      console.log(err)
+    }
+  })
+}
+
+searchInput.addEventListener('keyup', e => {
+  console.log(e.target.value)
+  if (resultsBox.classList.contains('not-visible')) {
+    resultsBox.classList.remove('not-visible');
+  }
+
+  sendSearchData(e.target.value)
+})
