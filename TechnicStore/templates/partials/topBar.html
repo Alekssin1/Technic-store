@@ -339,10 +339,10 @@
                         </a>
                     </li>
                     <li class="header__functions__li list-unstyled">
-                        {% if request.user.is_authenticated %}
+                    
                         {% load users_page_tags %}
                         <div id="count">{{ basket|count_in_bin }}</div>
-                        {% endif %}
+                     
                         <a onclick="BinShow()">
                             <svg width="26" height="39" viewBox="0 0 26 39" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
