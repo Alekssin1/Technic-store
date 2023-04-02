@@ -114,8 +114,61 @@ def logout_acc(request):
 
 
 def addbin(request, id):
-    return HttpResponse(f"addbin {id}")
+    bin_product = Products.objects.get(id=id)
+    bin_count = 1
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for item in basket:
+                if item['product_id'] == id:
+                    item['count'] += 1
+                    break
+        else:
+            basket.append({'product_id': id, 'count': 1})
+    else:
+        request.session['basket'] = [{'product_id': id, 'count': 1}]
+    request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})
 
 
 def del_bin_item(request, id):
-    return HttpResponse(f"del_bin_item {id}")
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for index, item in enumerate(basket):
+                if item['product_id'] == id:
+                    del basket[index]
+                    break
+        request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})
+
+
+def addCountBin(request, id):
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for item in basket:
+                if item['product_id'] == id:
+                    item['count'] += 1
+                    break
+        request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})
+
+
+def delCountBin(request, id):
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for item in basket:
+                if item['product_id'] == id:
+                    if item['count'] > 1:
+                        item['count'] -= 1
+                    else:
+                        basket.remove(item)
+                    break
+        request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})
