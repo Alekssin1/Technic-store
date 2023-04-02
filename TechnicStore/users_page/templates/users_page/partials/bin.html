@@ -5,36 +5,39 @@
         <img src="{% static 'img/png/bin/none.png' %}" alt="img-product" class="del_bin-img" onclick="BinHide()">
     </div>
     <div class="content_bin_reload" id="reload">
-        {% for product in bin.all %}
+        {% load users_page_tags %}
+        {% for item in basket %}
+        {% getBasket item.product_id as product%}
         <div class="product">
             <div class="img_product">
-                <img src="{{ product.product.img.all.0.img.url }}" alt="img-product" class="img_product-img">
+                <img src="{{ product.img.all.0.img.url }}" alt="img-product" class="img_product-img">
             </div>
             <div class="product-info">
                 <div class="product-info">
-                    <span class="product-name">{{ product.product.title }}</span>
+                    <span class="product-name">{{ product.title }}</span>
                     <span class="product-code">Код: 63913</span>
                     <button class="del_one_bin-img" style="border: none; background: none;"
-                        hx-post="{% url 'dellBin' product.product.id %}" hx-target="#bin-content" hx-swap="outerHTML" onclick="BinDell()">
-                        <img src="{% static 'img/png/bin/bin.png' %}" alt="img-product" class="del_one_bin-img" onclick="countMinus({{product.product.id}})">
+                        hx-post="{% url 'dellBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML"
+                        onclick="BinDell()">
+                        <img src="{% static 'img/png/bin/bin.png' %}" alt="img-product" class="del_one_bin-img"
+                            onclick="countMinus({{product.id}})">
                     </button>
                 </div>
                 <div class="cart-counter">
                     <button type="button" class="button-counter" aria-label="Видалити один товар"
-                        id="cart-counter-decrement-button"
-                        onclick="clickMinus({{product.product.id}})"
-                        hx-post="{% url 'delCountBin' product.product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
+                        id="cart-counter-decrement-button" onclick="clickMinus({{product.id}})"
+                        hx-post="{% url 'delCountBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
                         -
                     </button>
-                    <input class="input-counter" id="number__{{product.product.id}}" value="{{product.count}}" disabled ></input>
+                    <input class="input-counter" id="number__{{product.id}}" value="{{item.count}}" disabled></input>
                     <button type="button" class="button-counter" aria-label="Додати ще один товар"
-                        id="cart-counter-increment-button" 
-                        onclick="countPlus()"
-                        hx-post="{% url 'addCountBin' product.product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
+                        id="cart-counter-increment-button" onclick="countPlus()"
+                        hx-post="{% url 'addCountBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
                         +
                     </button>
                     {% load users_page_tags %}
-                    <span class="product-price" id="product-price_{{product.product.id}}">{{ product.product.price|mult:product.count }} ₴</span>
+                    <span class="product-price" id="product-price_{{product.id}}">{{product.price|mult:item.count }}
+                        ₴</span>
                 </div>
             </div>
         </div>
@@ -43,8 +46,8 @@
     <div class="order_buy">
         <div class="sum_price">
             <span class="sum_price-title">Разом:</span>
-            
-            <span class="sum_price-number" id="sum_price-number">{{ bin.all|sum_price }} ₴</span>
+
+            <span class="sum_price-number" id="sum_price-number">{{ basket|sum_price }} ₴</span>
         </div>
         <div class="button_buy-bin">
             <button class="button_buy-bin-button">Оформити замовлення</button>

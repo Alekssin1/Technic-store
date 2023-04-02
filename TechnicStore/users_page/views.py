@@ -24,14 +24,13 @@ class Home(CatalogMixin, ListView):
         return render(request, 'users_page/authorization.html', context=context)
 
 
-
 class Register(Notifications, ListView):
 
     def post(self, request, *args, **kwargs):
         register_form = UserRegistrationForm(request.POST)
         if register_form.is_valid():
             new_user = register_form.cleaned_data
-            
+
             email = new_user['email']
             if not User.objects.filter(email=email):
                 self.errors = []
@@ -45,7 +44,7 @@ class Register(Notifications, ListView):
                                            phone=phone, email=email, password=password, username=last_name+first_name)
                 user.save()
                 self.success.append(f'Користувач створений')
-                
+
             else:
                 self.errors.append('Користувач з таким email вже існує')
         else:
@@ -57,8 +56,8 @@ class Register(Notifications, ListView):
 class LoginPhone(Notifications, ListView):
 
     def post(self, request, *args, **kwargs):
-        phone_form = UserPhoneLogin(request.POST) 
-        
+        phone_form = UserPhoneLogin(request.POST)
+
         if phone_form.is_valid():
             user = phone_form.cleaned_data
             phone = user['phone']
@@ -73,11 +72,13 @@ class LoginPhone(Notifications, ListView):
                 self.errors.append('Такого користувача не існує')
 
             if user_auth is not None:
-                login(request, user_auth, backend='django.contrib.auth.backends.ModelBackend')
-                self.success.append(f'Користувач {user_auth.first_name} {user_auth.last_name}')
+                login(request, user_auth,
+                      backend='django.contrib.auth.backends.ModelBackend')
+                self.success.append(
+                    f'Користувач {user_auth.first_name} {user_auth.last_name}')
         else:
             self.errors.append('Такого користувача не існує')
-        
+
         return redirect(request.META.get('HTTP_REFERER'))
 
 
@@ -85,7 +86,7 @@ class LoginEmail(Notifications, ListView):
 
     def post(self, request):
         email_form = UserEmailLogin(request.POST)
-        
+
         if email_form.is_valid():
             user = email_form.cleaned_data
             email = user['email']
@@ -100,22 +101,77 @@ class LoginEmail(Notifications, ListView):
                 self.errors.append('Такого користувача не існує')
 
             if user_auth is not None:
-                login(request, user_auth, backend='django.contrib.auth.backends.ModelBackend')
-                self.success.append(f'Користувач {user_auth.first_name} {user_auth.last_name}')
-        else: 
+                login(request, user_auth,
+                      backend='django.contrib.auth.backends.ModelBackend')
+                self.success.append(
+                    f'Користувач {user_auth.first_name} {user_auth.last_name}')
+        else:
             self.errors.append('Такого користувача не існує')
 
         return redirect(request.META.get('HTTP_REFERER'))
-   
-    
-def logout_acc(request): 
+
+
+def logout_acc(request):
     logout(request)
     return redirect(request.META.get('HTTP_REFERER'))
 
 
 def addbin(request, id):
-    return HttpResponse(f"addbin {id}")
+    bin_product = Products.objects.get(id=id)
+    bin_count = 1
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for item in basket:
+                if item['product_id'] == id:
+                    item['count'] += 1
+                    break
+        else:
+            basket.append({'product_id': id, 'count': 1})
+    else:
+        request.session['basket'] = [{'product_id': id, 'count': 1}]
+    request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})
 
 
 def del_bin_item(request, id):
-    return HttpResponse(f"del_bin_item {id}")
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for index, item in enumerate(basket):
+                if item['product_id'] == id:
+                    del basket[index]
+                    break
+        request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})
+
+
+def addCountBin(request, id):
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for item in basket:
+                if item['product_id'] == id:
+                    item['count'] += 1
+                    break
+        request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})
+
+
+def delCountBin(request, id):
+    if request.session.get('basket'):
+        basket = request.session['basket']
+        product_ids = [item['product_id'] for item in basket]
+        if id in product_ids:
+            for item in basket:
+                if item['product_id'] == id:
+                    if item['count'] > 1:
+                        item['count'] -= 1
+                    else:
+                        basket.remove(item)
+                    break
+        request.session.modified = True
+    return render(request, 'users_page/partials/bin.html', context={'basket': request.session['basket']})

@@ -30,16 +30,16 @@ class CatalogMixin(Notifications):
 
         self.temp_error = self.add_to_temp(self.errors, self.temp_error)
         self.temp_success = self.add_to_temp(self.success, self.temp_success)
-        
-        bin = Bin.objects.filter(count=-1) if self.request.user.is_anonymous else self.request.user.basket
-        
+        bin = Bin.objects.filter(
+            count=-1) if self.request.user.is_anonymous else self.request.session.get('basket')
+
         context = {
             'register_form': user_register,
             'email_login_form': user_email_login,
             'phone_login_form': user_phone_login,
             'errors': self.temp_error,
             'success': self.temp_success,
-            'bin': bin,
+            'basket': bin,
         }
 
         return context
