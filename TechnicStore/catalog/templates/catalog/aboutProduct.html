@@ -66,22 +66,21 @@ About
 
 
     <section class="info_block">
-        <div class="container">
+        <div class="container" id="container_for_padding">
             <div class="product-tabs">
                 <div class="aboba">
                     <div class="tabs-wrapper-0-2-385 tabs-0-2-366 line-maker position-relative">
                         <div class="container-0-2-99">
                             <div class="dislay-flex align-items-center flex-row tabs tabs-bar-0-2-378 right-scroll">
-                                <a href="" class="active-tab-0-2-380" onclick="clickonelement(this)">Все про товар</a>
-                                <a onclick="scrollToMyDiv()" class="active-tab-0-2-381"
-                                    onclick="clickonelement(this)">Характеристики</a>
-                                <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Аксесуари</a>
-                                <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Фото</a>
-                                <a href="" class="active-tab-0-2-381"
+                                <a href="" class="active-tab-0-2-380" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Все про товар</a>
+                                <a onclick="scrollToMyDiv(this)"  onmouseenter="replaceBottom(this)" class="active-tab-0-2-381"
+                                    onclick="clickonelement(this)" onmouseleave="leaveBottom()">Характеристики</a>
+                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Аксесуари</a>
+                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Фото</a>
+                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onmouseleave="leaveBottom()"
                                     onclick="clickonelement(this)"><span>Відгуки</span></a>
                             </div>
-                            <div class="active-bar-0-2-107" id="id1"
-                                style="transition: all 0.3s ease 0s; width: 174.64px; left: 17.81px;">
+                            <div class="active-bar-0-2-107" id="id1">
                             </div>
                         </div>
                     </div>
