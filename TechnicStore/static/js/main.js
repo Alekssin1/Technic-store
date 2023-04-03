@@ -115,7 +115,6 @@ if (url.includes("catalog")) {
 } else {
   newUrl = 'catalog/search/';
 }
-console.log(newUrl)
 const searchForm = document.getElementById('search_form')
 const searchInput = document.getElementById('search-input')
 const resultsBox = document.getElementById('results-box')
