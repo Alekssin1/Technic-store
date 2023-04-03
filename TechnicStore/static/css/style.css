@@ -55,7 +55,7 @@ a {
     width: 100%;
     padding: 15px 15px;
     transition: 0.5s;
-    background-color: #f5f5f7;
+    background-color: white;
     position: absolute;
     text-align: center;
     top: 47px;
@@ -65,18 +65,31 @@ a {
     overflow-y:scroll;
 }
 
+.results-card .row:hover  {
+    background-color: #f5f5f7;
+    border-radius: 7px;
+    transition: .5s;
+}
+
+.results-card .row:hover h5 {
+    color: #FF680A;
+    transition: .5s;
+}
+
+
 .results-card::-webkit-scrollbar {
     width: 10px;
     height: 8px;
-    background-color: #f5f5f7;
+    background-color: white;
     border-radius: 9em;
 
 }
 
 .results-card::-webkit-scrollbar-thumb {
-    background-color: #c2c2c2;
+    background-color: #d9d9d9;
     border-radius: 9em;
 }
+
 
 .results-card h5 {
     display: -webkit-box;
