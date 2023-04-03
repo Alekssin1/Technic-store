@@ -44,8 +44,6 @@ function countMinus(id){
 function clickMinus(id) {
     var inp = document.getElementById("count");
     var my_inp = document.getElementById("number__"+id)
-    if (my_inp.value > 1) {
-        inp.textContent = parseInt(inp.textContent) - 1;
-    }    
+    inp.textContent = parseInt(inp.textContent) - 1;
 }
 

@@ -165,9 +165,8 @@ def delCountBin(request, id):
         if id in product_ids:
             for item in basket:
                 if item['product_id'] == id:
-                    if item['count'] > 1:
-                        item['count'] -= 1
-                    else:
+                    item['count'] -= 1 
+                    if item['count'] < 1:
                         basket.remove(item)
                     break
         request.session.modified = True
