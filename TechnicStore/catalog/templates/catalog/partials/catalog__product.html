@@ -4,11 +4,13 @@
         {% for product in products %}
         <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6">
             <div class="catalog__col d-flex  flex-column position-relative">
+                <div class="img_all">
                 {% if product.img__img %}
                 <img src="/{{product.img__img}}" alt="catalog__photo" class="catalog__img" draggable="false">
                 {% else %}
                 <img src="{{product.img.all.0.img.url}}" alt="catalog__photo" class="catalog__img" draggable="false">
                 {% endif %}
+                </div>
                 <a href="{% url 'aboutProduct' product.id%}" class="catalog__name">{{ product.title }}</a>
                 <div class="d-flex catalog__buy justify-content-end align-items-center">
                     <span class="catalog__price">{{ product.price }} ₴</span>
