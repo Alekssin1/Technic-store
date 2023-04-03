@@ -67,7 +67,7 @@ class FilterProductsJson(CatalogMixin, DetailView):
         number_SIM = self.get_query(
             'number_SIM', "Кількість SIM-карт", all_ValueProductAttributes)
         working_memory = self.get_query(
-            'working_memory', "Внутрішня пам'ять", all_ValueProductAttributes)
+            'working_memory', "Оперативна пам'ять", all_ValueProductAttributes)
         screen_diagonal = self.get_query(
             'screen_diagonal', "Діагональ екрану", all_ValueProductAttributes)
         screen_type = self.get_query(

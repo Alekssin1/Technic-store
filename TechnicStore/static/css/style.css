@@ -1031,6 +1031,16 @@ img[alt="UAN"] {
     height: 14px;
 }
 
+.navigation_links_li_a {
+ border: none;
+width: 100%;
+background: none;
+color: #3B6D9A;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+}
 
 .navigation_links a {
     color: #3B6D9A;
