@@ -1,7 +1,3 @@
-// window.onload = scroll(".tabs-0-2-366");
-
-
-
 export default function scroll(className) {
     var scr = $(className);
     scr.mousedown(function () {

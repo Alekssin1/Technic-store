@@ -2,21 +2,22 @@
 
 {% load static %}
 
-{% block title %} 
+{% block title %}
 About
 {% endblock %}
 
-{% block content %} 
+{% block content %}
+
 <body class="body__background">
 
-    {% include "users_page/partials/error.html" %} 
+    {% include "users_page/partials/error.html" %}
 
     {% include "partials/topBar.html" %}
 
     {% include "users_page/partials/success.html" %}
 
     <div class="bin" id="bin">
-        {%  include "users_page/partials/bin.html" %}
+        {% include "users_page/partials/bin.html" %}
     </div>
 
     <section class="navigation">
@@ -37,11 +38,11 @@ About
                     </svg>
                 </li>
                 <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
-                    
+
                     <button onclick="location.href='/catalog/{{ product.type.type }}'" class="navigation_links_li_a">
                         {{ product.type.type }}
                     </button>
-                   
+
                     <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
                         <path
                             d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
@@ -72,7 +73,8 @@ About
                         <div class="container-0-2-99">
                             <div class="dislay-flex align-items-center flex-row tabs tabs-bar-0-2-378 right-scroll">
                                 <a href="" class="active-tab-0-2-380" onclick="clickonelement(this)">Все про товар</a>
-                                <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Характеристики</a>
+                                <a onclick="scrollToMyDiv()" class="active-tab-0-2-381"
+                                    onclick="clickonelement(this)">Характеристики</a>
                                 <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Аксесуари</a>
                                 <a href="" class="active-tab-0-2-381" onclick="clickonelement(this)">Фото</a>
                                 <a href="" class="active-tab-0-2-381"
@@ -93,9 +95,7 @@ About
                                     <div class="slider_nav d-block">
                                         {% for img in product.img.all %}
                                         <div class="slider_nav__item">
-                                            <img src="{{ img.img.url }}"
-                                                alt="img"
-                                                class="preview-image">
+                                            <img src="{{ img.img.url }}" alt="img" class="preview-image">
                                         </div>
                                         {% endfor %}
                                     </div>
@@ -209,12 +209,12 @@ About
                             </div>
 
                             {% if product.amount %}
-                            <span class="align-items-center description-0-2-417 descriptionGreen-0-2-418">                                    
+                            <span class="align-items-center description-0-2-417 descriptionGreen-0-2-418">
                                 <img src="{% static 'img/svg/filter/checkMark.svg '%}" alt="" width="24" height="24">
                                 <span class="able">Є в наявності</span>
                             </span>
                             {% else %}
-                            <span class="align-items-center description-0-2-417 descriptionRed-0-2-418">    
+                            <span class="align-items-center description-0-2-417 descriptionRed-0-2-418">
                                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon icon-0-2-177 icon-0-2-31">
                                     <path
                                         d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z">
@@ -230,9 +230,8 @@ About
                         <div class="price">
                             <span class="catalog__price catalog__price_about price-sign">{{ product.price }} ₴</span>
                         </div>
-                        <button
-                        hx-post="{% url 'addBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML"
-                        onclick="countPlus()"
+                        <button hx-post="{% url 'addBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML"
+                            onclick="countPlus()"
                             class="df jcc bd0 cup on aic uppercase medium df buyButton-0-2-350 buy-0-2-407 root-0-2-165 root-d82-0-2-464 large-0-2-175 contained-0-2-173 full-width"><svg
                                 viewBox="0 0 24 24" fill="currentColor" class="icon-0-2-166 mr8 icon-0-2-31">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -408,12 +407,125 @@ About
                     </div>
                 </div>
             </div>
+            <h4 style="padding-left: 24px; margin-top: 40px;" id="details">Характеристики</h4>
+            <div class="product-tabs" style="padding: 32px 24px 40px;">
+                <div class="main_details"></div>
+                {% if product.procesor %}
+                <h6>Процесор</h6>
+                <div class="details">
+                    <div>
+                        <div class="row"><span>Процесор</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.procesor}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% if product.screen_diagonal %}
+                <h6>Екран</h6>
+                <div class="details">
+                    <div class="row"><span>Діагональ екрану</span></div>
+                        <div>
+                            <p>{{product.screen_diagonal}}</p>
+                        </div>
+                        {% endif %}
+                        {% if product.screen_type %}
+                        <div>
+                            <div class="row"><span>Тип екрану</span></div>
+                        </div>
+                        <div>
+                            <p>{{product.screen_type}}</p>
+                        </div>
+                        {% endif %}
+                        {% if product.screen_resolution %}
+                        <div>
+                            <div class="row"><span>Роздільна здатність екрану</span></div>
+                        </div>
+                        <div>
+                            <p>{{product.screen_resolution}}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                
+                
+                {% if product.main_camera %}
+                <h6>Основна камера</h6>
+                <div class="details">
+                    <div>
+                        <div class="row"><span>Основна камера</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.main_camera}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% if product.front_camera %}
+                <h6>Фронтальна камера</h6>
+                <div class="details">
+                    <div>
+                        <div class="row"><span>Фронтальна камера</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.front_camera}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% if product.working_memory %}
+                <h6>Пам'ять</h6>
+                <div class="details">
+                    <div>
+                        <div class="row"><span>Оперативна пам'ять</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.working_memory}}</p>
+                    </div>
+                    {% endif %}
+                    {% if product.internal_memory %}
+                    <div>
+                        <div class="row"><span>Внутрішня пам'ять</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.internal_memory}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% if product.battery_capacity %}
+                <h6>Акумулятор</h6>
+                <div class="details">
+                    <div>
+                        <div class="row"><span>Ємність акумулятора</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.battery_capacity}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <h6>Інше</h6>
+                <div class="details">
+                    {% if product.number_SIM %}
+                    <div>
+                        <div class="row"><span>Кількість SIM-карт</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.number_SIM}}</p>
+                    </div>
+                    {% endif %}
+                    {% if product.color %}
+                    <div>
+                        <div class="row"><span>Кількість SIM-карт</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.color}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
     </section>
 </body>
 {% endblock %}
 
 
-{% block scripts %} 
+{% block scripts %}
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
@@ -428,4 +540,5 @@ About
 <script src="{% static 'js/hide_bin.js'%}"></script>
 <script src="{% static 'js/reload_with_htmx.js'%}"></script>
 <script src="{% static 'js/main.js'%}"></script>
+<script src="{% static 'js/scrollToDiv.js'%}"></script>
 {% endblock %}

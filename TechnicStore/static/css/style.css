@@ -62,10 +62,10 @@ a {
     filter: drop-shadow(0px 12px 6px rgba(0, 0, 0, .2));
     border-radius: 0 0 10px 10px;
     max-height: 90vh;
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
 
-.results-card .row:hover  {
+.results-card .row:hover {
     background-color: #f5f5f7;
     border-radius: 7px;
     transition: .5s;
@@ -176,6 +176,7 @@ a {
         background-color: rgba(0, 0, 0, 0);
         height: auto;
     }
+
     .results-card {
         top: 51px;
     }
@@ -1032,10 +1033,10 @@ img[alt="UAN"] {
 }
 
 .navigation_links_li_a {
- border: none;
-width: 100%;
-background: none;
-color: #3B6D9A;
+    border: none;
+    width: 100%;
+    background: none;
+    color: #3B6D9A;
     text-decoration: none;
     font-weight: 500;
     font-size: 12px;
@@ -1117,6 +1118,12 @@ color: #3B6D9A;
 
 .active-tab-0-2-381 {
     color: rgba(0, 0, 0, 0.50);
+    cursor: pointer;
+}
+
+.active-tab-0-2-381:hover {
+    color: #fd7e14 !important;
+    transition: .5s;
 }
 
 element.style {
@@ -3226,11 +3233,12 @@ textarea {
     width: 100%;
 }
 
-@media (min-width: 1200px)
-{.col-xl-2 {
-    flex: 0 0 auto;
-    width: 20%!important;
-}}
+@media (min-width: 1200px) {
+    .col-xl-2 {
+        flex: 0 0 auto;
+        width: 20% !important;
+    }
+}
 
 .not_product {
     color: #3c3c3c;
@@ -3241,8 +3249,8 @@ textarea {
 }
 
 .button_checkbox_sort {
-    background: none!important;
-    border: none!important;
+    background: none !important;
+    border: none !important;
     list-style: none;
     padding: 0 16px;
     height: 40px;
@@ -3251,7 +3259,8 @@ textarea {
     align-items: center;
 }
 
-.results-card .h5, .results-card .h5:hover {
+.results-card .h5,
+.results-card .h5:hover {
     color: #000000;
 }
 
@@ -3269,4 +3278,56 @@ textarea {
 
 .adfd button span {
     margin-left: 5px;
+}
+
+.main_details {
+    word-break: break-word;
+    gap: 24px;
+}
+
+.details {
+    gap: 6px;
+    color: #424242;
+    display: grid;
+    font-size: 14px;
+    line-height: 25px;
+    grid-template-columns: 1fr;
+}
+
+.details span {
+    width: auto;
+    background-color: white;
+}
+
+.characteristic-0-2-647 .row span {
+    color: rgba(0, 0, 0, .54);
+}
+
+@media (min-width: 568px) {
+    .details {
+        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .details .row {
+        height: 18px;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+    }
+
+    .details p {
+        display: block;
+        margin: 0px;
+        margin-block-start: 0.3em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        margin-left: 7px;
+    }
+
+    .characteristic-0-2-647 .row span {
+        background: #fff;
+        line-height: 14px;
+        padding-right: 8px;
+    }
+
 }
