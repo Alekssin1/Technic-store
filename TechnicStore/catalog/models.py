@@ -64,6 +64,16 @@ class ProductsBrand(models.Model):
 
     def __str__(self):
         return self.brand
+    
+class CommentContent(models.Model):
+    text = models.CharField(max_length=500, default=None, verbose_name='Текст відгуку', blank=True, null=True)
+    rating = models.PositiveSmallIntegerField(default=0, verbose_name='Рейтинг')
+    author_name = models.CharField(max_length=200, default=None, verbose_name="Ім'я користувача")
+
+class Comment(models.Model):
+    count = models.PositiveSmallIntegerField(default=0, verbose_name='Кількість відгуків')
+    average_score = models.FloatField(default=0.0, verbose_name='Середня оцінка')
+    content = models.ManyToManyField(CommentContent, verbose_name='Деталі коментаря')
 
 
 class Products(models.Model):
@@ -91,7 +101,7 @@ class Products(models.Model):
     main_camera = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Основна камера', related_name="main_camera", blank=True, null=True)
     front_camera = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Фронтальна камера', related_name="front_camera", blank=True, null=True)
     battery_capacity = models.ForeignKey(ValueProductAttributes, on_delete=models.CASCADE, verbose_name='Ємність аккумулятора', related_name="battery_capacity", blank=True, null=True)
-
+    comments = models.ForeignKey(Comment, on_delete=models.CASCADE, verbose_name='Коментарі', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Товари'

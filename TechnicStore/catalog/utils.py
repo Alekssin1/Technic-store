@@ -14,6 +14,7 @@ class Notifications:
     success = []
     temp_success = []
 
+
     def add_to_temp(self, list_name, temp_name):
         temp_name.clear()
         temp_name = list_name.copy()

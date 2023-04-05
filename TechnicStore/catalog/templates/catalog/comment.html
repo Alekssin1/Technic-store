@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+About
+{% endblock %}
+
+{% block content %}
+
+<body class="body__background">
+
+    {% include "partials/topBar.html" %}
+
+    {% include "users_page/partials/success.html" %}
+
+    <div class="bin" id="bin">
+        {% include "users_page/partials/bin.html" %}
+    </div>
+
+    <section class="navigation">
+        <div class="container">
+            <ul class="navigation_links d-flex flex-row align-items-center">
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+                    <a href="{% url 'home' %}" draggable="false" class="navigation_links_li_a">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsHomeIcon-0-2-99 pr icon-0-2-36">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M11.9125 2.375C12.3491 2.375 12.8136 2.5102 13.2 2.8L13.2341 2.82562L21.6408 10.3316C22.7542 11.2196 22.1437 13 20.7 13H20V19C20 19.5752 19.7224 20.0668 19.3946 20.3946C19.0667 20.7225 18.5752 21 18 21H15C13.7838 21 13 19.9862 13 19V15H11V19C11 19.9862 10.2161 21 8.99998 21H5.99998C4.78383 21 3.99997 19.9862 3.99997 19V13H3.29997C1.85752 13 1.24674 11.2226 2.35629 10.3339L10.6149 2.87122C10.9965 2.50354 11.4923 2.375 11.9125 2.375ZM11.9324 4.37633C11.9429 4.37767 11.9542 4.38006 11.9655 4.38367C11.973 4.38608 11.9794 4.38865 11.9845 4.39107L19.3865 11H18V18.9573C17.995 18.9643 17.9882 18.9726 17.9804 18.9804C17.9726 18.9882 17.9647 18.9947 17.9577 18.9997L15 19V13H8.99998V19H5.99998V11H4.60219L11.9324 4.37633Z">
+                            </path>
+                        </svg>
+                    </a>
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
+                        <path
+                            d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+
+                    <button onclick="location.href='/catalog/{{ product.type.type }}'" class="navigation_links_li_a">
+                        {{ product.type.type }}
+                    </button>
+
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
+                        <path
+                            d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+                    <a href="" draggable="false" class="navigation_links_li_a">
+                        {{ product.brand.brand }}
+                    </a>
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
+                        <path
+                            d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
+                        </path>
+                    </svg>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="info_block">
+        <div class="container" id="container_for_padding">
+            <h4 style="padding-left: 24px; margin-top: 40px;" id="details">Коментарі</h4>
+            <div class="product-tabs" style="padding: 32px 24px 40px;">
+                <h6 class="h6_product-tabs">Відгуки про {{product.title}}</h6>
+               
+
+                <form method="POST" hx-post="{% url 'comment' product.id %}" class="add_comment-block" hx-target="#all_comments">
+                    <div class="rating"></div>
+                    {{ form.as_p }}
+                    <button class="add_comment">Додати відгук</button>
+                </form>
+                <div class="all_comments" id="all_comments">
+                    {% include "catalog/partials/comment_content.html" %}
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    {% endblock %}
+
+    {% block scripts %}
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="{% static 'js/mainOnclick.js'%}"></script>
+    <script src="{% static 'js/slick.min.js'%}"></script>
+    <script src="{% static 'js/slider__info.js'%}"></script>
+    <script src="{% static 'js/zoomInfo.js'%}"></script>
+    <script type="module" src="{% static 'js/info.js'%}"></script>
+    <script src="{% static 'js/hide.js'%}"></script>
+    <script src="{% static 'js/price__space.js' %}"></script>
+    <script src="{% static 'js/hide_bin.js'%}"></script>
+    <script src="{% static 'js/reload_with_htmx.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+
+    <script src="{% static 'js/textarea.js' %}"></script>
+    <script src="{% static 'js/raty/raty.js' %}"></script>
+    <script src="{% static 'js/rating_stars.js'%}"></script>
+    <script src="{% static 'js/hide.js'%}"></script>
+
+    {% endblock %}

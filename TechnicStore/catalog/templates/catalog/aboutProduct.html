@@ -77,7 +77,7 @@ About
                                     onclick="clickonelement(this)" onmouseleave="leaveBottom()">Характеристики</a>
                                 <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Аксесуари</a>
                                 <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Фото</a>
-                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onmouseleave="leaveBottom()"
+                                <a href="{% url 'comment' product.id %}" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onmouseleave="leaveBottom()"
                                     onclick="clickonelement(this)"><span>Відгуки</span></a>
                             </div>
                             <div class="active-bar-0-2-107" id="id1">
@@ -189,7 +189,7 @@ About
                                                 </path>
                                             </svg>
                                         </span>
-                                        <span class="medium rating-number">4.0</span>
+                                        <span class="medium rating-number">{{product.comments.average_score}}</span>
                                     </div>
                                 </div>
                                 <div class="code">

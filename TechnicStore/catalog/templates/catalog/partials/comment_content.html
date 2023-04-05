@@ -1,0 +1,18 @@
+{% include "users_page/partials/error.html" %}
+
+{% for comment in comments.comments.content.all %}
+
+<div class="comment_box">
+    <div class="nick_for_comment">{{ comment.author_name }}</div>
+    <div class="text_comment">
+        {{ comment.text }}
+    </div>
+    <!-- <div id="star{{comment.id}}"></div> -->
+    
+     
+</div>
+
+{{comment.rating}}
+{{comment.rating|json_script:"rating"}}
+{{comment.id|json_script:"id"}}
+{% endfor %}

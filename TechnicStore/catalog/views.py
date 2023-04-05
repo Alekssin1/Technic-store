@@ -4,22 +4,13 @@ from django.views.generic.detail import DetailView
 from django.http import JsonResponse
 from django.db.models import Q
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+
 
 from .utils import CatalogMixin
-from .models import Products, ProductsBrand, ValueProductAttributes
-from django.urls import reverse
-
-
-class Catalog(CatalogMixin, ListView):
-
-    def get(self, request):
-        context = self.renderPage()
-        context['products'] = Products.objects.all().prefetch_related('img').only(
-            'title', 'price', 'img', 'type', 'brand', 'amount',
-        )
-        context['brands'] = ProductsBrand.objects.all()
-        context['sort'] = "за популярністю"
-        return render(request, 'catalog/catalog.html', context=context)
+from catalog.models import Products, ProductsBrand, ValueProductAttributes, Comment, CommentContent
+from .form import CommentForm
 
 
 class AboutProduct(CatalogMixin, DetailView):
@@ -156,7 +147,7 @@ class SearchProductsJson(CatalogMixin, ListView):
         return JsonResponse({})
 
 
-class Catalog2(CatalogMixin, DetailView):
+class Catalog(CatalogMixin, DetailView):
     def get(self, request, *args, **kwargs):
         type = self.kwargs.get("type")
         context = self.renderPage()
@@ -173,3 +164,67 @@ class Catalog2(CatalogMixin, DetailView):
         if context.get('products', False):
             context['filters'] = context['products'][0].type.characteristic.all()
         return render(request, 'catalog/catalog.html', context=context)
+
+
+class Comments(CatalogMixin, DetailView, LoginRequiredMixin):
+
+    def get(self, request, *args, **kwargs):
+        context = self.renderPage()
+        context['product'] = Products.objects.filter(id=self.kwargs.get("id")).prefetch_related('img').only(
+            'title', 'price', 'img', 'type', 'brand', 'amount',
+        ).first()
+        context['form'] = CommentForm()
+
+        context['comments'] = get_object_or_404(
+            Products, id=self.kwargs.get("id"))
+
+        return render(request, 'catalog/comment.html', context=context)
+
+    def add_comment(self, rating, text):
+        comment_content = CommentContent()
+        comment_content.text = text
+        comment_content.rating = rating
+        comment_content.author_name = self.request.user.username
+        comment_content.save()
+        return comment_content
+
+    def post(self, request, *args, **kwargs):
+        rating = request.POST.get('rating')
+        text = request.POST.get('text')
+
+        product = get_object_or_404(Products, id=self.kwargs.get("id"))
+
+        if not product.comments:
+            my_comment = Comment.objects.create(count=1, average_score=rating)
+            comment_content = self.add_comment(rating, text)
+            my_comment.content.add(comment_content)
+            my_comment.save()
+
+            product.comments = my_comment
+            product.save()
+        else:
+            if self.request.user.username in [i.author_name for i in product.comments.content.all()]:
+                context = self.renderPage()
+                context['comments'] = product
+                self.errors = []
+                self.errors.append('Ви вже залишали відгук про цей товар')
+                context['errors'] = self.errors
+                return render(request, 'catalog/partials/comment_content.html', context=context)
+            comment_content = self.add_comment(rating, text)
+            product.comments.content.add(comment_content)
+            comment_count = product.comments.content.count()
+            
+            if product.comments.average_score:
+                new_average_score = (
+                    (comment_count-1) * product.comments.average_score + float(rating))/comment_count
+            else:
+                new_average_score = rating
+
+            product.comments.count = comment_count
+            product.comments.average_score = new_average_score
+            product.save()
+
+        context = self.renderPage()
+        context['comments'] = product
+
+        return render(request, 'catalog/partials/comment_content.html', context=context)
