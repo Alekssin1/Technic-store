@@ -1,18 +1,22 @@
 {% include "users_page/partials/error.html" %}
 
-{% for comment in comments.comments.content.all %}
+{% for comment in comments.comments.content.all reversed %}
 
 <div class="comment_box">
     <div class="nick_for_comment">{{ comment.author_name }}</div>
+    <div id="star{{comment.id}}" class="star_in_comment"></div>
     <div class="text_comment">
         {{ comment.text }}
-    </div>
-    <!-- <div id="star{{comment.id}}"></div> -->
-    
-     
+    </div> 
 </div>
 
-{{comment.rating}}
-{{comment.rating|json_script:"rating"}}
-{{comment.id|json_script:"id"}}
 {% endfor %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        {% for comment in comments.comments.content.all %}
+            $('#star{{ comment.id }}').raty({path: "\ /static/js/raty/images",  starOff: 'star-off.png',
+  starOn: 'star-on.png', readOnly: true, score: parseInt({{ comment.rating }}) });
+        {% endfor %}
+    });
+</script>

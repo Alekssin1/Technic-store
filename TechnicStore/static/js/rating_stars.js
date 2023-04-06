@@ -1,5 +1,5 @@
-var rating = JSON.parse(document.getElementById('rating').textContent);
-var id = JSON.parse(document.getElementById('id').textContent);
+// var rating = JSON.parse(document.getElementById('rating').textContent);
+// var id = JSON.parse(document.getElementById('id').textContent);
 
 $(document).ready(function () {
   $('.rating').raty({
@@ -14,7 +14,12 @@ $(document).ready(function () {
   });
 });
 
+// aboba('#star'+id)
 
-$('#star'+id).raty({path: "\ /static/js/raty/images",  starOff: 'star-off.png',
-starOn: 'star-on.png', readOnly: true, score: parseInt(rating) });
+// function aboba(name) {
+//   console.log("aboab")
+//   $(name).raty({path: "\ /static/js/raty/images",  starOff: 'star-off.png',
+//   starOn: 'star-on.png', readOnly: true, score: parseInt(rating) });
+// }
+
 
