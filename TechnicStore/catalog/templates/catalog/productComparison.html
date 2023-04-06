@@ -48,15 +48,16 @@ Catalog
     <section class="comparison">
         <div class="container">
             <section class="title__page">
-                <h2>Смартфони</h2>
+                <h2>{{comparison.0.type}}</h2>
             </section>
 
             <div class="comparison__info d-flex">
-                <span class="companies__number">Додано товарів: 5</span>
+                {% load users_page_tags %}
+                <span class="companies__number">Додано товарів: {{ comparison|lens }}</span>
                 <div class="d-flex align-items-center">
                     <span class="mr-15 fs-14">Порівняти:</span>
                     <span class="align-items-center description-0-2-417 descriptionGreen-0-2-418">
-                        <span class="able fs-12">Консолі</span>
+                        <span class="able fs-12">{{comparison.0.type}}</span>
                     </span>
                 </div>
             </div>
@@ -96,153 +97,161 @@ Catalog
                 </div>
 
                 <div class="comparison__product">
-                    <div class="first__product">
-                        <div>
-                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
-                                draggable="false">
-                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
-                                Console</a>
-
-                            <div class="catalog__buy">
-                                <div>
-                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
-                                            alt="UAN" draggable="false"></span>
-                                </div>
-
-                                <div>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
-                                            draggable="false">
-                                    </button>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
-                                            draggable="false">
-                                    </button>
-                                </div>
-                            </div>
-                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
-                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg' %}" alt="like"
-                                    draggable="false">
-                            </button>
-                        </div>
-                    </div>
+                    
 
                     <div class="another__products">
-                        <div class="another__products__item">
-                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
-                                draggable="false">
-                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
-                                Console</a>
-
-                            <div class="catalog__buy">
-                                <div>
-                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
-                                            alt="UAN" draggable="false"></span>
-                                </div>
-
-                                <div>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
-                                            draggable="false">
-                                    </button>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
-                                            draggable="false">
-                                    </button>
-                                </div>
-                            </div>
-                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
-                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
+                        {% load users_page_tags %}
+                        {% for item in comparison %}
+                        {% getBasket item.product_id as product%}
+                       
+                            <div class="another__products__item">
+                                <div class="df jcc aic">
+                                    <img src="{{ product.img.all.0.img.url }}" alt="catalog__photo" class="catalog__img"
                                     draggable="false">
-                            </button>
-                        </div>
-
-                        <div class="another__products__item">
-                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
-                                draggable="false">
-                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
-                                Console</a>
-
-                            <div class="catalog__buy">
-                                <div>
-                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
-                                            alt="UAN" draggable="false"></span>
                                 </div>
+                                
 
-                                <div>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
-                                            draggable="false">
-                                    </button>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
-                                            draggable="false">
-                                    </button>
+                                <a href="{% url 'aboutProduct' product.id %}" class="catalog__name">{{product.title}}</a>
+
+                                <div class="catalog__buy">
+                                    <div>
+                                        <span class="catalog__price">{{product.price}} ₴<img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                                alt="UAN" draggable="false"></span>
+                                    </div>
+
+                                    <div>
+                                        <button class="border-0 button__catalog">
+                                            <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
+                                                draggable="false">
+                                        </button>
+                                        <button class="border-0 button__catalog">
+                                            <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
+                                                draggable="false">
+                                        </button>
+                                    </div>
                                 </div>
+                                <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                                    <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg' %}" alt="like"
+                                        draggable="false">
+                                </button>
+
+                                
+                                   
+                                    {% if product.procesor %}
+                                    <h6>Процесор</h6>
+                                    <div class="details">
+                                        <div>
+                                            <div class="row"><span>Процесор</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.procesor}}</p>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if product.screen_diagonal %}
+                                    <h6>Екран</h6>
+                                    <div class="details">
+                                        <div class="row"><span>Діагональ екрану</span></div>
+                                        <div>
+                                            <p>{{product.screen_diagonal}}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if product.screen_type %}
+                                        <div>
+                                            <div class="row"><span>Тип екрану</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.screen_type}}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if product.screen_resolution %}
+                                        <div>
+                                            <div class="row"><span>Роздільна здатність екрану</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.screen_resolution}}</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                    
+                    
+                                    {% if product.main_camera %}
+                                    <h6>Основна камера</h6>
+                                    <div class="details">
+                                        <div>
+                                            <div class="row"><span>Основна камера</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.main_camera}}</p>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if product.front_camera %}
+                                    <h6>Фронтальна камера</h6>
+                                    <div class="details">
+                                        <div>
+                                            <div class="row"><span>Фронтальна камера</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.front_camera}}</p>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if product.working_memory %}
+                                    <h6>Пам'ять</h6>
+                                    <div class="details">
+                                        <div>
+                                            <div class="row"><span>Оперативна пам'ять</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.working_memory}}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if product.internal_memory %}
+                                        <div>
+                                            <div class="row"><span>Внутрішня пам'ять</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.internal_memory}}</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    {% if product.battery_capacity %}
+                                    <h6>Акумулятор</h6>
+                                    <div class="details">
+                                        <div>
+                                            <div class="row"><span>Ємність акумулятора</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.battery_capacity}}</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <h6>Інше</h6>
+                                    <div class="details">
+                                        {% if product.number_SIM %}
+                                        <div>
+                                            <div class="row"><span>Кількість SIM-карт</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.number_SIM}}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if product.color %}
+                                        <div>
+                                            <div class="row"><span>Колір</span></div>
+                                        </div>
+                                        <div>
+                                            <p>{{product.color}}</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                
                             </div>
-                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
-                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
-                                    draggable="false">
-                            </button>
-                        </div>
 
-                        <div class="another__products__item">
-                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
-                                draggable="false">
-                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
-                                Console</a>
-
-                            <div class="catalog__buy">
-                                <div>
-                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
-                                            alt="UAN" draggable="false"></span>
-                                </div>
-
-                                <div>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
-                                            draggable="false">
-                                    </button>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
-                                            draggable="false">
-                                    </button>
-                                </div>
-                            </div>
-                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
-                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
-                                    draggable="false">
-                            </button>
-                        </div>
-
-                        <div class="another__products__item">
-                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
-                                draggable="false">
-                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
-                                Console</a>
-
-                            <div class="catalog__buy">
-                                <div>
-                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
-                                            alt="UAN" draggable="false"></span>
-                                </div>
-
-                                <div>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
-                                            draggable="false">
-                                    </button>
-                                    <button class="border-0 button__catalog">
-                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
-                                            draggable="false">
-                                    </button>
-                                </div>
-                            </div>
-                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
-                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
-                                    draggable="false">
-                            </button>
-                        </div>
+                        {% endfor %}
+                        
                     </div>
                 </div>
             </div>

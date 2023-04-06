@@ -26,10 +26,12 @@ class AboutProduct(CatalogMixin, DetailView):
         return render(request, 'catalog/aboutProduct.html', context=context)
 
 
-class ProductComparison(ListView):
+class ProductComparison(CatalogMixin, ListView):
 
     def get(self, request):
-        return HttpResponse("ProductComparison")
+        context = self.renderPage()
+        context['comparison'] = self.request.session['comparison']
+        return render(request, "catalog/productComparison.html", context=context)
 
 
 class FilterProductsJson(CatalogMixin, DetailView):
@@ -257,3 +259,23 @@ def add_liked_item(request, id):
     request.session.modified = True
     return render(request, 'catalog/partials/empty_page.html', context={'like': request.session['like']})
 
+def add_comparison_item(request, id):
+    if request.session.get('comparison'):
+        comparison_items = request.session['comparison']
+        product = Products.objects.get(id=id)
+        if str(product.type) == comparison_items[0]['type']: #same type
+            product_ids = [item['product_id'] for item in comparison_items]
+            if id in product_ids:
+                for index, item in enumerate(comparison_items):
+                    if item['product_id'] == id:
+                        del comparison_items[index]
+                        break
+            else:
+                comparison_items.append({'product_id': id, 'type': str(product.type)})
+    else:
+        product = Products.objects.get(id=id)
+        request.session['comparison'] = [{'product_id': id, 'type': str(product.type)}]
+    
+    print(request.session['comparison'])
+    request.session.modified = True
+    return render(request, 'catalog/partials/empty_page.html', context={'comparison': request.session['comparison']})

@@ -9,6 +9,7 @@ urlpatterns = [
  path('search/', views.SearchProductsJson.as_view(), name='search'),
  path('like/', views.Like.as_view(), name='like'),
  path('addlike/<int:id>/', views.add_liked_item, name='addLike'),
+ path('comparison/<int:id>/', views.add_comparison_item, name='addComparison'),
 path('<str:type>', views.Catalog.as_view(), name='catalog2'),
 path('comment/<int:id>', views.Comments.as_view(), name='comment'),
 

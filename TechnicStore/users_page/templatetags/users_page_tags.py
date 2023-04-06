@@ -38,3 +38,8 @@ def my_in(id, like):
     if id in [i['product_id'] for i in like]:
         return False
     return True
+
+
+@register.filter(name='lens')
+def lens(my_list):
+    return len(my_list)
