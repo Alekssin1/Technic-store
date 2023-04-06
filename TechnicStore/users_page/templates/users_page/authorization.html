@@ -121,9 +121,20 @@ Main
                                     <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket" draggable="false" onclick="countPlus()">
                                 </button>
                         </div>
-                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
-                            <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false">
+                        <button class="position-absolute top-0 end-0 border-0 catalog__button__like" 
+                        hx-post="{% url 'addLike' product.id %}" hx-target="#like-content" hx-swap="outerHTML">
+                            {% load users_page_tags %}
+                            {% if product.id|my_in:like %}
+                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like" draggable="false" class="like_button_nonactive" onclick="replaceImg(this)">
+                            {% else %}
+                                <img src="{% static 'img/svg/productTile/likeactive.svg'%}" alt="like" draggable="false" onclick="replaceImg(this)" class="like_button_active">
+                            {% endif %}
                         </button>
+        
+        
+                        <div class="display_none">
+                            <div id="like-content"></div>
+                        </div>
 
                     </div>
                 </div>

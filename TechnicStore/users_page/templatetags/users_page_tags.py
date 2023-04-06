@@ -31,3 +31,10 @@ def count_in_bin(bin):
 @register.simple_tag()
 def getBasket(id):
     return Products.objects.get(id=id)
+
+
+@register.filter(name='my_in')
+def my_in(id, like):
+    if id in [i['product_id'] for i in like]:
+        return False
+    return True

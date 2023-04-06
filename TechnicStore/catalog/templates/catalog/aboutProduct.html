@@ -72,12 +72,17 @@ About
                     <div class="tabs-wrapper-0-2-385 tabs-0-2-366 line-maker position-relative">
                         <div class="container-0-2-99">
                             <div class="dislay-flex align-items-center flex-row tabs tabs-bar-0-2-378 right-scroll">
-                                <a href="" class="active-tab-0-2-380" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Все про товар</a>
-                                <a onclick="scrollToMyDiv(this)"  onmouseenter="replaceBottom(this)" class="active-tab-0-2-381"
-                                    onclick="clickonelement(this)" onmouseleave="leaveBottom()">Характеристики</a>
-                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Аксесуари</a>
-                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onclick="clickonelement(this)" onmouseleave="leaveBottom()">Фото</a>
-                                <a href="{% url 'comment' product.id %}" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)" onmouseleave="leaveBottom()"
+                                <a href="" class="active-tab-0-2-380" onmouseenter="replaceBottom(this)"
+                                    onclick="clickonelement(this)" onmouseleave="leaveBottom()">Все про товар</a>
+                                <a onclick="scrollToMyDiv(this)" onmouseenter="replaceBottom(this)"
+                                    class="active-tab-0-2-381" onclick="clickonelement(this)"
+                                    onmouseleave="leaveBottom()">Характеристики</a>
+                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)"
+                                    onclick="clickonelement(this)" onmouseleave="leaveBottom()">Аксесуари</a>
+                                <a href="" class="active-tab-0-2-381" onmouseenter="replaceBottom(this)"
+                                    onclick="clickonelement(this)" onmouseleave="leaveBottom()">Фото</a>
+                                <a href="{% url 'comment' product.id %}" class="active-tab-0-2-381"
+                                    onmouseenter="replaceBottom(this)" onmouseleave="leaveBottom()"
                                     onclick="clickonelement(this)"><span>Відгуки</span></a>
                             </div>
                             <div class="active-bar-0-2-107" id="id1">
@@ -239,16 +244,28 @@ About
                             </svg><span>Купити</span>
                         </button>
                         <div class="dg mt32 container-0-2-419">
-                            <button class="on bd0 df cup button-0-2-420 add-favorite" type="button">
-                                <div id="containerIcon-0-2-421"
-                                    class="df aic jcc br10 mr16 containerIcon-0-2-421 add-favorite"><svg
-                                        viewBox="0 0 24 24" fill="currentColor" class="icons add-favorite icon-0-2-31">
+                            <button class="on bd0 df cup button-0-2-420 add-favorite" type="button" onclick="replaceImgAbout(this)"
+                                hx-post="{% url 'addLike' product.id %}" hx-target="#like-content" hx-swap="outerHTML">
+                                <div id="containerIcon-0-2-421" 
+                                    class="df aic jcc br10 mr16 containerIcon-0-2-421 add-favorite">
+                                    {% load users_page_tags %}
+                                    {% if product.id|my_in:like %}
+                                    <svg viewBox="0 0 24 24" fill="grey" class="icons add-favorite icon-0-2-31 like_button_nonactive">
                                         <path
                                             d="M16.5 3C14.76 3 13.09 3.81 12 5.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5C2 12.28 5.4 15.36 10.55 20.04L10.6541 20.1341C11.4178 20.824 12.5803 20.8218 13.3413 20.129L13.45 20.03C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3ZM12.1 18.55L12 18.65L11.9 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 5.99 11.07 7.36H12.94C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55Z">
                                         </path>
-                                    </svg></div>
-                                <div class="df aic fz12 text-0-2-426 add-favorite"><span class="add-favorite">У 5289
-                                        осіб</span><span id="add-favorite" class="add-favorite textLink-0-2-427">в
+                                    </svg>
+                                    {% else %}
+                                    <svg viewBox="0 0 24 24" fill="red" class="icons add-favorite icon-0-2-31 like_button_active">
+                                        <path
+                                            d="M16.5 3C14.76 3 13.09 3.81 12 5.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5C2 12.28 5.4 15.36 10.55 20.04L10.6541 20.1341C11.4178 20.824 12.5803 20.8218 13.3413 20.129L13.45 20.03C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3ZM12.1 18.55L12 18.65L11.9 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 5.99 11.07 7.36H12.94C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55Z">
+                                        </path>
+                                    </svg>
+                                    {% endif %}
+                                    
+                                </div>
+                                <div class="df aic fz12 text-0-2-426 add-favorite"><span id="add-favorite"
+                                        class="add-favorite textLink-0-2-427">в
                                         обраному</span></div>
                             </button>
                             <button class="on bd0 df cup button-0-2-420 add-compare" type="button">
@@ -424,29 +441,29 @@ About
                 <h6>Екран</h6>
                 <div class="details">
                     <div class="row"><span>Діагональ екрану</span></div>
-                        <div>
-                            <p>{{product.screen_diagonal}}</p>
-                        </div>
-                        {% endif %}
-                        {% if product.screen_type %}
-                        <div>
-                            <div class="row"><span>Тип екрану</span></div>
-                        </div>
-                        <div>
-                            <p>{{product.screen_type}}</p>
-                        </div>
-                        {% endif %}
-                        {% if product.screen_resolution %}
-                        <div>
-                            <div class="row"><span>Роздільна здатність екрану</span></div>
-                        </div>
-                        <div>
-                            <p>{{product.screen_resolution}}</p>
-                        </div>
-                        {% endif %}
+                    <div>
+                        <p>{{product.screen_diagonal}}</p>
                     </div>
-                
-                
+                    {% endif %}
+                    {% if product.screen_type %}
+                    <div>
+                        <div class="row"><span>Тип екрану</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.screen_type}}</p>
+                    </div>
+                    {% endif %}
+                    {% if product.screen_resolution %}
+                    <div>
+                        <div class="row"><span>Роздільна здатність екрану</span></div>
+                    </div>
+                    <div>
+                        <p>{{product.screen_resolution}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+
                 {% if product.main_camera %}
                 <h6>Основна камера</h6>
                 <div class="details">
@@ -518,6 +535,9 @@ About
                     </div>
                     {% endif %}
                 </div>
+            </div>
+            <div class="display_none">
+                <div id="like-content"></div>
             </div>
     </section>
 </body>

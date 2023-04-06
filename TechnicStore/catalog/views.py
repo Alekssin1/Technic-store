@@ -22,6 +22,7 @@ class AboutProduct(CatalogMixin, DetailView):
         context['product'] = Products.objects.filter(id=self.kwargs.get("id")).prefetch_related('img').only(
             'title', 'price', 'img', 'type', 'brand', 'amount',
         ).first()
+        context['like'] = self.request.session['like']
         return render(request, 'catalog/aboutProduct.html', context=context)
 
 
@@ -163,6 +164,7 @@ class Catalog(CatalogMixin, DetailView):
         context['type'] = type
         if context.get('products', False):
             context['filters'] = context['products'][0].type.characteristic.all()
+        context['like'] = self.request.session['like']
         return render(request, 'catalog/catalog.html', context=context)
 
 
@@ -228,3 +230,30 @@ class Comments(CatalogMixin, DetailView, LoginRequiredMixin):
         context['comments'] = product
 
         return render(request, 'catalog/partials/comment_content.html', context=context)
+
+
+class Like(CatalogMixin, ListView): 
+    
+    def get(self, request, *args, **kwargs):
+        context = self.renderPage()
+        context['like'] = self.request.session['like']
+        return render(request, 'catalog/like.html', context=context)
+
+
+def add_liked_item(request, id):
+    if request.session.get('like'):
+        liked_items = request.session['like']
+        product_ids = [item['product_id'] for item in liked_items]
+        if id in product_ids:
+            for index, item in enumerate(liked_items):
+                if item['product_id'] == id:
+                    del liked_items[index]
+                    break
+        else:
+            liked_items.append({'product_id': id})
+    else:
+        request.session['like'] = [{'product_id': id}]
+    
+    request.session.modified = True
+    return render(request, 'catalog/partials/empty_page.html', context={'like': request.session['like']})
+

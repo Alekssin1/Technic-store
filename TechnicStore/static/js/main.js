@@ -168,10 +168,34 @@ const sendSearchData = (product) => {
 }
 
 searchInput.addEventListener('keyup', e => {
-  console.log(e.target.value)
   if (resultsBox.classList.contains('not-visible')) {
     resultsBox.classList.remove('not-visible');
   }
 
   sendSearchData(e.target.value)
 })
+
+function replaceImg(btn) {
+  if (btn.classList.value === "like_button_nonactive") {
+    btn.classList.remove("like_button_nonactive")
+    btn.classList.add("like_button_active")
+    btn.src = "/static/img/svg/productTile/likeactive.svg"
+  }
+  else {
+    btn.classList.remove("like_button_active")
+    btn.classList.add("like_button_nonactive")
+    btn.src = "/static/img/svg/productTile/Heart_Icon_Deselected.svg"
+  }
+}
+
+function replaceImgAbout(btn) {
+  const like = document.querySelector('#containerIcon-0-2-421 svg');
+  if (like.style.fill === "grey") {
+    like.style.fill = "red";
+  }
+  else {
+    like.style.fill = "grey";
+  }
+  // like.style.fill = "red";
+  
+}

@@ -3445,3 +3445,7 @@ textarea {
 .star_in_comment {
     margin-top: 10px;
 }
+
+.display_none {
+    display: none!important;
+}

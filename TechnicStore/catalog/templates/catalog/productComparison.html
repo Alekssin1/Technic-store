@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} 
+Catalog
+{% endblock %}
+
+{% block content %} 
+<body>
+    
+    {% include "users_page/partials/error.html" %} 
+
+    {% include "partials/topBar.html" %}
+
+    {% include "users_page/partials/success.html" %}
+
+    <div class="bin" id="bin">
+        {%  include "users_page/partials/bin.html" %}
+    </div>
+
+    <section class="catalog__navigation">
+        <div class="container">
+            <ul class="navigation_links d-flex flex-row align-items-center">
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+                    <a href="{% url 'home' %}" class="navigation_links_li_a">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsHomeIcon-0-2-99 pr icon-0-2-36">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M11.9125 2.375C12.3491 2.375 12.8136 2.5102 13.2 2.8L13.2341 2.82562L21.6408 10.3316C22.7542 11.2196 22.1437 13 20.7 13H20V19C20 19.5752 19.7224 20.0668 19.3946 20.3946C19.0667 20.7225 18.5752 21 18 21H15C13.7838 21 13 19.9862 13 19V15H11V19C11 19.9862 10.2161 21 8.99998 21H5.99998C4.78383 21 3.99997 19.9862 3.99997 19V13H3.29997C1.85752 13 1.24674 11.2226 2.35629 10.3339L10.6149 2.87122C10.9965 2.50354 11.4923 2.375 11.9125 2.375ZM11.9324 4.37633C11.9429 4.37767 11.9542 4.38006 11.9655 4.38367C11.973 4.38608 11.9794 4.38865 11.9845 4.39107L19.3865 11H18V18.9573C17.995 18.9643 17.9882 18.9726 17.9804 18.9804C17.9726 18.9882 17.9647 18.9947 17.9577 18.9997L15 19V13H8.99998V19H5.99998V11H4.60219L11.9324 4.37633Z">
+                            </path>
+                        </svg>
+                    </a>
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="breadcrumbsItemIcon-0-2-100 icon-0-2-36">
+                        <path
+                            d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="navigation__links_li list-unstyled d-flex flex-row align-items-center">
+                    <a href="" class="navigation_links_li_a">
+                        Порівняння товарів
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="comparison">
+        <div class="container">
+            <section class="title__page">
+                <h2>Смартфони</h2>
+            </section>
+
+            <div class="comparison__info d-flex">
+                <span class="companies__number">Додано товарів: 5</span>
+                <div class="d-flex align-items-center">
+                    <span class="mr-15 fs-14">Порівняти:</span>
+                    <span class="align-items-center description-0-2-417 descriptionGreen-0-2-418">
+                        <span class="able fs-12">Консолі</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row">
+                <div class="comparison__characteristics">
+                    <button class="comparison__characteristics__btn">Очистити список</button>
+
+                    <div class="d-flex align-items-center comparison__sorting__menu">
+                        <h4>Виводити за: </h4>
+                        <div class="d-flex flex-row">
+                            <div id="forOut" class="forOut d-flex align-items-center">
+                                <p class="p-0 m-0 fs-12 comparison__choice">Всі</p>
+                                <svg viewBox="0 0 24 24" fill="#3B6D9A" class="comparison__svg">
+                                    <path
+                                        d="M17.2946 9.29462C16.9053 8.90534 16.2743 8.905 15.8846 9.29385L12 13.17L8.11538 9.29385C7.72569 8.905 7.09466 8.90534 6.70538 9.29462C6.31581 9.68419 6.31581 10.3158 6.70538 10.7054L12 16L17.2946 10.7054C17.6842 10.3158 17.6842 9.68419 17.2946 9.29462Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+
+
+                        <div class="comparison__sorting" id="comparison__sorting">
+                            <ul>
+                                <a href="#">
+                                    <li>Всі</li>
+                                </a>
+                                <a href="#">
+                                    <li>Відмінності</li>
+                                </a>
+                                <a href="#">
+                                    <li>Співпадіння</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison__product">
+                    <div class="first__product">
+                        <div>
+                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
+                                draggable="false">
+                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                                Console</a>
+
+                            <div class="catalog__buy">
+                                <div>
+                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                            alt="UAN" draggable="false"></span>
+                                </div>
+
+                                <div>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
+                                            draggable="false">
+                                    </button>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
+                                            draggable="false">
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg' %}" alt="like"
+                                    draggable="false">
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="another__products">
+                        <div class="another__products__item">
+                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
+                                draggable="false">
+                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                                Console</a>
+
+                            <div class="catalog__buy">
+                                <div>
+                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                            alt="UAN" draggable="false"></span>
+                                </div>
+
+                                <div>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
+                                            draggable="false">
+                                    </button>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
+                                            draggable="false">
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
+                                    draggable="false">
+                            </button>
+                        </div>
+
+                        <div class="another__products__item">
+                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
+                                draggable="false">
+                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                                Console</a>
+
+                            <div class="catalog__buy">
+                                <div>
+                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                            alt="UAN" draggable="false"></span>
+                                </div>
+
+                                <div>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
+                                            draggable="false">
+                                    </button>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
+                                            draggable="false">
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
+                                    draggable="false">
+                            </button>
+                        </div>
+
+                        <div class="another__products__item">
+                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
+                                draggable="false">
+                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                                Console</a>
+
+                            <div class="catalog__buy">
+                                <div>
+                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                            alt="UAN" draggable="false"></span>
+                                </div>
+
+                                <div>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
+                                            draggable="false">
+                                    </button>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
+                                            draggable="false">
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
+                                    draggable="false">
+                            </button>
+                        </div>
+
+                        <div class="another__products__item">
+                            <img src="{% static 'img/temp/pngwing 6.jpg'%}" alt="catalog__photo" class="catalog__img"
+                                draggable="false">
+                            <a class="catalog__name">Ігрова консоль Microsoft Xbox Series S 512 GB All-Digital
+                                Console</a>
+
+                            <div class="catalog__buy">
+                                <div>
+                                    <span class="catalog__price">11&nbsp999 <img src="{% static 'img/svg/productTile/UAN.svg'%}"
+                                            alt="UAN" draggable="false"></span>
+                                </div>
+
+                                <div>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
+                                            draggable="false">
+                                    </button>
+                                    <button class="border-0 button__catalog">
+                                        <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
+                                            draggable="false">
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="position-absolute top-0 end-0 border-0 catalog__button__like">
+                                <img src="{% static 'img/svg/productTile/Heart_Icon_Deselected.svg'%}" alt="like"
+                                    draggable="false">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+{% endblock %}
+
+
+{% block scripts %} 
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="module" src="{% static 'js/comparison__sorting.js' %}"></script>
+<script src="{% static 'js/hide.js'%}"></script>
+<script src="{% static 'js/price__space.js' %}"></script>
+<script src="{% static 'js/hide_bin.js'%}"></script>
+{% endblock %}

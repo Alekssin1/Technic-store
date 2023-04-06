@@ -1,0 +1,37 @@
+{% load static %}
+<div class="row" id="like-content">
+    {% load users_page_tags %}
+    {% for item in like %}
+    {% getBasket item.product_id as product%}
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="catalog__col d-flex  flex-column position-relative">
+            <div class="img_all">
+                <img src="{{product.img.all.0.img.url}}" alt="catalog__photo" class="catalog__img"
+                    draggable="false">
+            </div>
+
+            <a href="{% url 'aboutProduct' product.id%}" class="catalog__name">{{ product.title }}</a>
+
+            <div class="d-flex catalog__buy justify-content-end align-items-center">
+                <span class="catalog__price">{{ product.price }} ₴</span>
+                <button class="border-0 button__catalog">
+                    <img src="{% static 'img/svg/productTile/division.svg'%}" alt="catalog__division"
+                        draggable="false">
+                </button>
+                <button class="border-0 button__catalog" hx-post="{% url 'addBin' product.id %}"
+                    hx-target="#bin-content" hx-swap="outerHTML">
+                    <img src="{% static 'img/svg/productTile/basket.svg'%}" alt="catalog__basket"
+                        draggable="false" onclick="countPlus()">
+                </button>
+            </div>
+            <button class="position-absolute top-0 end-0 border-0 catalog__button__like"
+                hx-post="{% url 'addLike' product.id %}" hx-target="#like-content" hx-swap="outerHTML">
+                <img src="{% static 'img/svg/productTile/likeactive.svg'%}" alt="like"
+                    draggable="false">
+            </button>
+
+           
+        </div>
+    </div>
+    {% endfor %}
+</div>
