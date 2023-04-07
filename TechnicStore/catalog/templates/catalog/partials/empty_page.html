@@ -1,8 +1,12 @@
 {% load static %}
 <div class="row" id="like-content">
+    
+    
     {% load users_page_tags %}
-    {% for item in like %}
-    {% getBasket item.product_id as product%}
+    {% in_basket like as all_in_basket%}
+
+    {% for product in all_in_basket %}
+
     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
         <div class="catalog__col d-flex  flex-column position-relative">
             <div class="img_all">

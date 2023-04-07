@@ -201,11 +201,12 @@ Catalog
                             </svg>
                         </div>
                     </div>
-                    
-
+            
                     <hr>
                     
-                    {% for filter in filters %}
+
+                    {% for filter in products.0.type.characteristic.all %}
+                    
                         <div class="filter__title d-flex justify-content-between align-items-center"
                             id="brands__filter__title">
                             <span>{{filter.attribute}}</span>

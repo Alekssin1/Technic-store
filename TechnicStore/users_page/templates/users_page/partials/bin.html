@@ -6,8 +6,10 @@
     </div>
     <div class="content_bin_reload" id="reload">
         {% load users_page_tags %}
-        {% for item in basket %}
-        {% getBasket item.product_id as product%}
+        {% in_basket basket as all_in_basket%}
+
+        {% for product in all_in_basket %}
+        
         <div class="product">
             <div class="img_product">
                 <img src="{{ product.img.all.0.img.url }}" alt="img-product" class="img_product-img">
@@ -29,15 +31,24 @@
                         hx-post="{% url 'delCountBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
                         -
                     </button>
+                    {% for item in basket%}
+                    {% if item.product_id == product.id%}
                     <input class="input-counter" id="number__{{product.id}}" value="{{item.count}}" disabled></input>
+                    {%endif%}
+                    {%endfor%}
                     <button type="button" class="button-counter" aria-label="Додати ще один товар"
                         id="cart-counter-increment-button" onclick="countPlus()"
                         hx-post="{% url 'addCountBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
                         +
                     </button>
-                    {% load users_page_tags %}
+                
+                  
+                    {% for item in basket%}
+                    {% if item.product_id == product.id%}
                     <span class="product-price" id="product-price_{{product.id}}">{{product.price|mult:item.count }}
                         ₴</span>
+                    {%endif%}
+                    {%endfor%}
                 </div>
             </div>
         </div>

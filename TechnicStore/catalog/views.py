@@ -19,8 +19,15 @@ class AboutProduct(CatalogMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         context = self.renderPage()
-        context['product'] = Products.objects.filter(id=self.kwargs.get("id")).prefetch_related('img').only(
-            'title', 'price', 'img', 'type', 'brand', 'amount',
+        context['product'] = Products.objects.filter(id=self.kwargs.get("id"))\
+            .select_related('procesor').select_related('internal_memory').select_related('color')\
+                .select_related('number_SIM').select_related('working_memory').select_related('screen_diagonal')\
+                    .select_related('screen_type').select_related('screen_resolution').select_related('main_camera')\
+                        .select_related('front_camera').select_related('battery_capacity')\
+                .prefetch_related('img').only(
+            'title', 'price', 'img', 'type', 'brand', 'amount', 'procesor__value', 'internal_memory__value', 'color__value',
+            'number_SIM__value', 'working_memory__value', 'screen_diagonal__value', 'screen_type__value', 'screen_resolution__value',
+            'main_camera__value', 'front_camera__value', 'battery_capacity__value'
         ).first()
         context['like'] = self.request.session['like']
         return render(request, 'catalog/aboutProduct.html', context=context)
@@ -122,6 +129,8 @@ class FilterProductsJson(CatalogMixin, DetailView):
 
         context = {'products': queryset,
                    'sort': sort_text}
+        
+        context['like'] = self.request.session['like']
 
         return render(request, 'catalog/partials/catalog__product.html', context=context)
 
@@ -154,8 +163,11 @@ class Catalog(CatalogMixin, DetailView):
     def get(self, request, *args, **kwargs):
         type = self.kwargs.get("type")
         context = self.renderPage()
-        context['products'] = Products.objects.all().filter(type__type=type).prefetch_related('img').only(
-            'title', 'price', 'img', 'type', 'brand', 'amount',
+        context['products'] = Products.objects.all().filter(type__type=type).select_related('brand')\
+        .prefetch_related('img').prefetch_related('type__characteristic')\
+            .prefetch_related('type__characteristic__value').only(
+            'title', 'price', 'img', 'type', 'brand', 'amount', 
+            'type__characteristic__attribute', 'type__characteristic__value__value'
         )
 
         brands_all = [i.brand.brand for i in context['products']]
@@ -164,8 +176,6 @@ class Catalog(CatalogMixin, DetailView):
         context['brands'] = brands
         context['sort'] = "за популярністю"
         context['type'] = type
-        if context.get('products', False):
-            context['filters'] = context['products'][0].type.characteristic.all()
         context['like'] = self.request.session['like']
         return render(request, 'catalog/catalog.html', context=context)
 

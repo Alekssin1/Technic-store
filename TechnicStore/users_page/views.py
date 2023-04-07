@@ -19,7 +19,7 @@ class Home(CatalogMixin, ListView):
     def get(self, request):
         context = self.renderPage()
         context['products'] = Products.objects.all().order_by('?')[:5].prefetch_related('img').only(
-            'title', 'price', 'img', 'type', 'brand', 'amount',
+            'title', 'price', 'img', 'type', 'brand', 'amount', 'img__img'
         )
         context['like'] = self.request.session['like']
         return render(request, 'users_page/authorization.html', context=context)
@@ -115,8 +115,6 @@ def logout_acc(request):
 
 
 def addbin(request, id):
-    bin_product = Products.objects.get(id=id)
-    bin_count = 1
     if request.session.get('basket'):
         basket = request.session['basket']
         product_ids = [item['product_id'] for item in basket]

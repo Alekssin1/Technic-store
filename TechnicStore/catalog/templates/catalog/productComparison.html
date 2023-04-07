@@ -100,10 +100,11 @@ Catalog
                     
 
                     <div class="another__products">
+                        
                         {% load users_page_tags %}
-                        {% for item in comparison %}
-                        {% getBasket item.product_id as product%}
-                       
+                        {% in_basket comparison as all_in_basket%}
+                        {% for product in all_in_basket %}
+
                             <div class="another__products__item">
                                 <div class="df jcc aic">
                                     <img src="{{ product.img.all.0.img.url }}" alt="catalog__photo" class="catalog__img"
