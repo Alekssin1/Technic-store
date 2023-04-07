@@ -190,12 +190,16 @@ function replaceImg(btn) {
 
 function replaceImgAbout(btn) {
   const like = document.querySelector('#containerIcon-0-2-421 svg');
-  if (like.style.fill === "grey") {
-    like.style.fill = "red";
+
+  if (like.classList.value.includes("like_button_nonactive_fill")) {
+    like.classList.remove("like_button_nonactive_fill")
+    like.classList.add("like_button_active_fill")
+    like.src = "/static/img/svg/productTile/likeactive.svg"
   }
   else {
-    like.style.fill = "grey";
+    like.classList.remove("like_button_active_fill")
+    like.classList.add("like_button_nonactive_fill")
+    like.src = "/static/img/svg/productTile/Heart_Icon_Deselected.svg"
   }
-  // like.style.fill = "red";
   
 }

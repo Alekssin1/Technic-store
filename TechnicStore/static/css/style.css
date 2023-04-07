@@ -3449,3 +3449,11 @@ textarea {
 .another__products__item h6:first-of-type{
     margin-top: 60px;
 }
+
+.like_button_nonactive_fill {
+    fill: gray;
+}
+
+.like_button_active_fill {
+    fill: red;
+}
