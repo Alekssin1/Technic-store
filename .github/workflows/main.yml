@@ -11,7 +11,7 @@ jobs:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: actrs2
         ports:
-          - '3309:3309'
+          - 3309:3309
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -33,7 +33,7 @@ jobs:
           USER_BD: root
           PASSWORD_BD: root
           HOST_BD: 127.0.0.1
-          PORT_BD: '3309:3309'
+          PORT_BD: 3309
 
       - name: Run tests
         run: cd TechnicStore && python3 manage.py test
