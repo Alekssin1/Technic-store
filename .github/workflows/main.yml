@@ -5,7 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql-db:
-        restart: unless-stopped
         env_file: cd TechnicStore && .env
         ports:
           - "3309:3309"
