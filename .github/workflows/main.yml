@@ -7,7 +7,6 @@ jobs:
     services:
       db:
         image: mariadb:5.5
-        restart: always
         env:
           - MYSQL_HOST=localhost
           - MYSQL_PORT=3309  # cannot change this port to other number
