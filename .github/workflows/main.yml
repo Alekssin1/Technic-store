@@ -31,7 +31,7 @@ jobs:
           DBUSER: root
           DBPASSWORD: zergling
           DBHOST: 127.0.0.1
-          DBPORT: $
+          DBPORT: ['3306:3306']
         run: cd TechnicStore && python manage.py migrate
 
       - name: Run tests
@@ -41,5 +41,5 @@ jobs:
           DBUSER: root
           DBPASSWORD: zergling
           DBHOST: 127.0.0.1
-          DBPORT: $
+          DBPORT: ['3306:3306']
         run: cd TechnicStore && python3 manage.py test
