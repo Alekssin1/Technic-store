@@ -8,10 +8,8 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-            NAME_BD: actrs2
-            USER_BD: root
-            PASSWORD_BD: root
-            HOST_BD: 127.0.0.1
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: actrs2
         ports:
           - '3309:3309'
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
