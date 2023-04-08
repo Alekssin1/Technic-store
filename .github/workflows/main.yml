@@ -8,6 +8,7 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
+          MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: zergling
           MYSQL_DATABASE: mysql
         ports: ['3306:3306']
