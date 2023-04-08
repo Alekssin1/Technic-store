@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql-db:
-        env_file: cd TechnicStore && .env
+        env: cd TechnicStore && .env
         ports:
           - "3309:3309"
 
