@@ -21,15 +21,16 @@ class AboutProduct(CatalogMixin, DetailView):
         context = self.renderPage()
         context['product'] = Products.objects.filter(id=self.kwargs.get("id"))\
             .select_related('procesor').select_related('internal_memory').select_related('color')\
-                .select_related('number_SIM').select_related('working_memory').select_related('screen_diagonal')\
-                    .select_related('screen_type').select_related('screen_resolution').select_related('main_camera')\
-                        .select_related('front_camera').select_related('battery_capacity')\
-                .prefetch_related('img').only(
+            .select_related('number_SIM').select_related('working_memory').select_related('screen_diagonal')\
+            .select_related('screen_type').select_related('screen_resolution').select_related('main_camera')\
+            .select_related('front_camera').select_related('battery_capacity')\
+            .prefetch_related('img').only(
             'title', 'price', 'img', 'type', 'brand', 'amount', 'procesor__value', 'internal_memory__value', 'color__value',
             'number_SIM__value', 'working_memory__value', 'screen_diagonal__value', 'screen_type__value', 'screen_resolution__value',
             'main_camera__value', 'front_camera__value', 'battery_capacity__value'
         ).first()
-        context['like'] = self.request.session['like']
+        if self.request.session.get('like', False):
+            context['like'] = self.request.session['like']
         return render(request, 'catalog/aboutProduct.html', context=context)
 
 
@@ -37,7 +38,8 @@ class ProductComparison(CatalogMixin, ListView):
 
     def get(self, request):
         context = self.renderPage()
-        context['comparison'] = self.request.session['comparison']
+        if self.request.session.get('comparison'):
+            context['comparison'] = self.request.session['comparison']
         return render(request, "catalog/productComparison.html", context=context)
 
 
@@ -129,8 +131,9 @@ class FilterProductsJson(CatalogMixin, DetailView):
 
         context = {'products': queryset,
                    'sort': sort_text}
-        
-        context['like'] = self.request.session['like']
+
+        if self.request.session.get('like', False):
+            context['like'] = self.request.session['like']
 
         return render(request, 'catalog/partials/catalog__product.html', context=context)
 
@@ -164,9 +167,9 @@ class Catalog(CatalogMixin, DetailView):
         type = self.kwargs.get("type")
         context = self.renderPage()
         context['products'] = Products.objects.all().filter(type__type=type).select_related('brand')\
-        .prefetch_related('img').prefetch_related('type__characteristic')\
+            .prefetch_related('img').prefetch_related('type__characteristic')\
             .prefetch_related('type__characteristic__value').only(
-            'title', 'price', 'img', 'type', 'brand', 'amount', 
+            'title', 'price', 'img', 'type', 'brand', 'amount',
             'type__characteristic__attribute', 'type__characteristic__value__value'
         )
 
@@ -176,7 +179,8 @@ class Catalog(CatalogMixin, DetailView):
         context['brands'] = brands
         context['sort'] = "за популярністю"
         context['type'] = type
-        context['like'] = self.request.session['like']
+        if self.request.session.get('like', False):
+            context['like'] = self.request.session['like']
         return render(request, 'catalog/catalog.html', context=context)
 
 
@@ -227,7 +231,7 @@ class Comments(CatalogMixin, DetailView, LoginRequiredMixin):
             comment_content = self.add_comment(rating, text)
             product.comments.content.add(comment_content)
             comment_count = product.comments.content.count()
-            
+
             if product.comments.average_score:
                 new_average_score = (
                     (comment_count-1) * product.comments.average_score + float(rating))/comment_count
@@ -244,11 +248,12 @@ class Comments(CatalogMixin, DetailView, LoginRequiredMixin):
         return render(request, 'catalog/partials/comment_content.html', context=context)
 
 
-class Like(CatalogMixin, ListView): 
-    
+class Like(CatalogMixin, ListView):
+
     def get(self, request, *args, **kwargs):
         context = self.renderPage()
-        context['like'] = self.request.session['like']
+        if self.request.session.get('like', False):
+            context['like'] = self.request.session['like']
         return render(request, 'catalog/like.html', context=context)
 
 
@@ -265,15 +270,16 @@ def add_liked_item(request, id):
             liked_items.append({'product_id': id})
     else:
         request.session['like'] = [{'product_id': id}]
-    
+
     request.session.modified = True
     return render(request, 'catalog/partials/empty_page.html', context={'like': request.session['like']})
+
 
 def add_comparison_item(request, id):
     if request.session.get('comparison'):
         comparison_items = request.session['comparison']
         product = Products.objects.get(id=id)
-        if str(product.type) == comparison_items[0]['type']: #same type
+        if str(product.type) == comparison_items[0]['type']:  # same type
             product_ids = [item['product_id'] for item in comparison_items]
             if id in product_ids:
                 for index, item in enumerate(comparison_items):
@@ -281,11 +287,13 @@ def add_comparison_item(request, id):
                         del comparison_items[index]
                         break
             else:
-                comparison_items.append({'product_id': id, 'type': str(product.type)})
+                comparison_items.append(
+                    {'product_id': id, 'type': str(product.type)})
     else:
         product = Products.objects.get(id=id)
-        request.session['comparison'] = [{'product_id': id, 'type': str(product.type)}]
-    
+        request.session['comparison'] = [
+            {'product_id': id, 'type': str(product.type)}]
+
     print(request.session['comparison'])
     request.session.modified = True
     return render(request, 'catalog/partials/empty_page.html', context={'comparison': request.session['comparison']})

@@ -6,10 +6,11 @@
     </div>
     <div class="content_bin_reload" id="reload">
         {% load users_page_tags %}
+        {% if basket %}
         {% in_basket basket as all_in_basket%}
-
+        {% endif %}
         {% for product in all_in_basket %}
-        
+
         <div class="product">
             <div class="img_product">
                 <img src="{{ product.img.all.0.img.url }}" alt="img-product" class="img_product-img">
@@ -41,8 +42,8 @@
                         hx-post="{% url 'addCountBin' product.id %}" hx-target="#bin-content" hx-swap="outerHTML">
                         +
                     </button>
-                
-                  
+
+
                     {% for item in basket%}
                     {% if item.product_id == product.id%}
                     <span class="product-price" id="product-price_{{product.id}}">{{product.price|mult:item.count }}

@@ -21,7 +21,8 @@ class Home(CatalogMixin, ListView):
         context['products'] = Products.objects.all().order_by('?')[:5].prefetch_related('img').only(
             'title', 'price', 'img', 'type', 'brand', 'amount', 'img__img'
         )
-        context['like'] = self.request.session['like']
+        if self.request.session.get('like', False):
+            context['like'] = self.request.session['like']
         return render(request, 'users_page/authorization.html', context=context)
 
 
