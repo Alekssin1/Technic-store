@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'TechnicStore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('NAME_BD'),
-        'USER': os.getenv('USER_BD'),
-        'PASSWORD': os.getenv('PASSWORD_BD'),
-        'HOST': os.getenv('HOST_BD'),
-        'PORT': os.getenv('PORT_BD'),
+        'NAME': 'actrs2',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': '3309',
     }
 }
 

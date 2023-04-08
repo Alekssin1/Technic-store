@@ -29,12 +29,7 @@ jobs:
       
       - name: Run database migrations
         run: cd TechnicStore && python manage.py migrate
-        env: 
-          NAME_BD: actrs2
-          USER_BD: root
-          PASSWORD_BD: root
-          HOST_BD: 127.0.0.1
-          PORT_BD: 3309
+
 
       - name: Run tests
         run: cd TechnicStore && python3 manage.py test
