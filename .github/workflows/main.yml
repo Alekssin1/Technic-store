@@ -14,11 +14,14 @@ jobs:
         ports: ['3306:3306']
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
       
       - name: Install dependencies
-      - uses: actions/setup-python@v2
-      - run: cd TechnicStore && pip install -r requirements.txt
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+        run: cd TechnicStore && pip install -r requirements.txt
       
       - name: Run database migrations
         env: 
@@ -28,7 +31,7 @@ jobs:
           DBPASSWORD: zergling
           DBHOST: 127.0.0.1
           DBPORT: $
-      - run: cd TechnicStore && python manage.py migrate
+        run: cd TechnicStore && python manage.py migrate
 
       - name: Run tests
         env: 
@@ -38,4 +41,4 @@ jobs:
           DBPASSWORD: zergling
           DBHOST: 127.0.0.1
           DBPORT: $
-      - run: cd TechnicStore && python3 manage.py test
+        run: cd TechnicStore && python3 manage.py test
