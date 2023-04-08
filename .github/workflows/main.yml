@@ -1,5 +1,5 @@
 name: test_Django
-on: [pull_request, push]
+on: [push]
 jobs:
   test_project:
     runs-on: ubuntu-latest
@@ -8,25 +8,34 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-            MYSQL_ALLOW_EMPTY_PASSWORD: yes
-            MYSQL_DATABASE: myapp
+            NAME_BD: actrs2
+            USER_BD: root
+            PASSWORD_BD: root
+            HOST_BD: 127.0.0.1
         ports:
-          - '3306:3306'
+          - '3309:3309'
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Install dependencies
+      - name: Set up
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+
       - name: Install dependencies
         run: cd TechnicStore && pip install -r requirements.txt
       
       - name: Run database migrations
         run: cd TechnicStore && python manage.py migrate
+        env: 
+          NAME_BD: actrs2
+          USER_BD: root
+          PASSWORD_BD: root
+          HOST_BD: 127.0.0.1
+          PORT_BD: 3309
 
       - name: Run tests
         run: cd TechnicStore && python3 manage.py test
